@@ -97,6 +97,9 @@ class Settings:
         self.bot_port: int = int(e("BOT_PORT") or "3978")
 
         self.github_token: str = e("GITHUB_TOKEN")
+        self.agency_cli_path: str = e("AGENCY_CLI_PATH") or str(
+            Path.home() / ".config" / "agency" / "CurrentVersion" / "agency"
+        )
 
         self.copilot_model: str = e("COPILOT_MODEL") or "claude-sonnet-4.6"
         self.copilot_agent: str = e("COPILOT_AGENT") or ""

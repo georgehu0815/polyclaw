@@ -247,7 +247,13 @@ export default function SetupWizard() {
             <div className="setup__panel">
               <h2>GitHub</h2>
               <p>Authenticate with GitHub to enable the AI agent powered by Copilot.</p>
-              {githubDevice ? (
+              {status?.copilot?.auth_method === 'agency' ? (
+                <div className="setup__done">
+                  <span className="badge badge--ok">Authenticated via Agency</span>
+                  <p className="text-muted">Using Agency CLI for authentication. No additional setup required.</p>
+                  <button className="btn btn--secondary" onClick={() => { manualStepRef.current = false; setCurrentStep('config') }}>Continue</button>
+                </div>
+              ) : githubDevice ? (
                 <div className="setup__device-code">
                   <p>Copy the code below, then sign in at the link:</p>
                   <div className="setup__code-display">

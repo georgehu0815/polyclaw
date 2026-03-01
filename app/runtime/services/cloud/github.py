@@ -22,6 +22,13 @@ class GitHubAuth:
     def status(self) -> dict[str, Any]:
         from ...config.settings import cfg
 
+        agency_path = cfg.agency_cli_path
+        if agency_path and os.path.isfile(agency_path):
+            return {
+                "authenticated": True,
+                "auth_method": "agency",
+                "details": f"Authenticated via Agency CLI ({agency_path})",
+            }
         if cfg.github_token:
             return {"authenticated": True, "details": "Using GITHUB_TOKEN from environment"}
         try:

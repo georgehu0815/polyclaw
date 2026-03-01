@@ -12,7 +12,7 @@ export interface AuthCheckResponse {
 
 export interface SetupStatus {
   azure?: { logged_in?: boolean; subscription?: string; tenant?: string }
-  copilot?: { authenticated?: boolean; username?: string }
+  copilot?: { authenticated?: boolean; username?: string; auth_method?: string; details?: string }
   prerequisites_configured?: boolean
   telegram_configured?: boolean
   tunnel?: { active?: boolean; url?: string; restricted?: boolean }

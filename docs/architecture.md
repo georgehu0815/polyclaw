@@ -1,0 +1,186 @@
+# Polyclaw — Architecture Design Diagram
+
+> **Polyclaw** is an autonomous AI copilot platform built on the GitHub Copilot SDK (Claude Sonnet 4.6).
+> Full-stack: Python/aiohttp backend · React frontend · Bun Terminal UI · Azure Container Apps deployment.
+
+---
+
+## Architecture Overview
+
+```mermaid
+graph TB
+    %% ─── CLIENT INTERFACES ───
+    subgraph clients["Client Interfaces"]
+        WebUI["React Web UI<br/>(Vite · port 9090)"]
+        TUI["Terminal UI<br/>(Bun + OpenTUI)"]
+        CLI["Interactive CLI<br/>(prompt_toolkit)"]
+        BotCh["Bot Channels<br/>(Teams · Slack · Telegram · Discord)"]
+    end
+
+    %% ─── ADMIN SERVER ───
+    subgraph admin["Admin Server  (aiohttp · port 9090)"]
+        AuthMW["Bearer Token Middleware"]
+        SPA["React SPA Static Serve"]
+        WS["WebSocket · /api/chat"]
+        AdminAPI["REST API · 22 Route Modules<br/>chat · sessions · skills · plugins · schedules<br/>mcp · guardrails · tool-activity · monitoring<br/>identity · sandbox · proactive · workspace · setup"]
+    end
+
+    %% ─── RUNTIME SERVER ───
+    subgraph runtime["Runtime Server  (aiohttp · port 8080 / 3978)"]
+        BotEP["Bot Framework Endpoint<br/>/api/messages"]
+        VoiceEP["Voice / Realtime Endpoint<br/>ACS Callbacks"]
+        RuntimeProxy["Runtime Proxy"]
+
+        subgraph agent["Agent Core"]
+            CopilotSDK["GitHub Copilot SDK<br/>(Claude Sonnet 4.6)"]
+            EventH["Event Handler<br/>(streaming)"]
+            PromptB["Prompt Builder<br/>(templates)"]
+            Tools["Custom Tools<br/>scheduler · memory · voice · cards"]
+            HITL["HITL<br/>(Human-in-the-Loop)"]
+            AITL["AITL<br/>(AI-in-the-Loop)"]
+            PolicyB["Policy Bridge<br/>+ Guardrails"]
+            MCP["MCP Servers<br/>(Playwright MCP + custom)"]
+            Sched["Scheduler Engine<br/>(cron + one-shot)"]
+            Sandbox["Sandbox Executor<br/>(isolated execution)"]
+        end
+    end
+
+    %% ─── STATE & PERSISTENCE ───
+    subgraph state["State & Persistence  (disk-based JSON)"]
+        Sessions["Session Store"]
+        Memory["Long-term Memory"]
+        GuardDB["Guardrails Config"]
+        PluginDB["Plugin Config"]
+        MCPDB["MCP Config"]
+        AuditLog["Tool Activity Audit Log"]
+        SandboxCfg["Sandbox Config"]
+    end
+
+    %% ─── EXTENSIBILITY ───
+    subgraph ext["Extensibility"]
+        Skills["Skills<br/>(Markdown)<br/>daily-briefing · note-taking<br/>summarize-url · web-search"]
+        Plugins["Plugins<br/>foundry-agents · second-brain-workiq<br/>github-status · wikipedia-lookup"]
+    end
+
+    %% ─── SERVICES LAYER ───
+    subgraph svc["Services Layer"]
+        AzureSvc["Azure CLI Wrapper<br/>+ Provisioner + ACA Deployer"]
+        GHAuth["GitHub Auth"]
+        CFTunnel["Cloudflare Tunnel"]
+        KVSvc["Azure Key Vault Client"]
+        OTel["OpenTelemetry<br/>(tracing · metrics · logs)"]
+        PromptShield["Prompt Shield<br/>(content safety)"]
+        SecPreflight["Security Preflight<br/>(RBAC · identity)"]
+    end
+
+    %% ─── EXTERNAL SERVICES ───
+    subgraph external["External Services"]
+        AzureBot["Azure Bot Service<br/>(multi-channel)"]
+        ACS["Azure Communication Services<br/>(voice calls)"]
+        ACA["Azure Container Apps<br/>(deployment)"]
+        AKV["Azure Key Vault<br/>(secrets)"]
+        AzureMonitor["Azure Monitor<br/>+ Log Analytics"]
+        AIShield["Azure AI Prompt Shield"]
+        M365["Microsoft Graph / M365"]
+        GHCopilot["GitHub API + Copilot"]
+        CF["Cloudflare Tunnel"]
+    end
+
+    %% ─── DATA FLOW ───
+    WebUI -->|"HTTPS / WS"| AuthMW
+    TUI -->|"REST API"| AuthMW
+    CLI -->|"direct"| agent
+    BotCh -->|"Bot Framework"| AzureBot
+
+    AuthMW --> SPA
+    AuthMW --> WS
+    AuthMW --> AdminAPI
+    AdminAPI --> RuntimeProxy
+    WS --> RuntimeProxy
+    RuntimeProxy --> agent
+
+    AzureBot -->|"POST /api/messages"| BotEP
+    BotEP --> agent
+    VoiceEP --> agent
+
+    CopilotSDK <--> EventH
+    EventH <--> PromptB
+    EventH --> Tools
+    Tools --> HITL
+    Tools --> AITL
+    Tools --> PolicyB
+    PolicyB --> GuardDB
+    CopilotSDK <--> MCP
+    Tools --> Sched
+    Tools --> Sandbox
+
+    Skills -->|"loaded at runtime"| agent
+    Plugins -->|"loaded at runtime"| agent
+
+    agent <-->|"read / write"| Sessions
+    agent <-->|"read / write"| Memory
+    agent -->|"write"| AuditLog
+    Sandbox <--> SandboxCfg
+    MCP <--> MCPDB
+    Plugins <--> PluginDB
+
+    AdminAPI <-->|"read / write"| state
+
+    svc -->|"used by Admin + Runtime"| admin
+    svc -->|"used by Admin + Runtime"| runtime
+
+    AzureSvc --> ACA
+    GHAuth --> GHCopilot
+    CFTunnel --> CF
+    KVSvc --> AKV
+    OTel --> AzureMonitor
+    PromptShield --> AIShield
+    SecPreflight --> ACA
+
+    agent -->|"LLM calls"| GHCopilot
+    agent -->|"voice"| ACS
+    agent -->|"M365 data"| M365
+
+    %% ─── STYLES ───
+    classDef clientStyle fill:#e7f5ff,stroke:#1971c2,color:#1971c2
+    classDef adminStyle fill:#f3d9fa,stroke:#862e9c,color:#5f3dc4
+    classDef runtimeStyle fill:#ffe8cc,stroke:#d9480f,color:#d9480f
+    classDef agentStyle fill:#e5dbff,stroke:#5f3dc4,color:#5f3dc4
+    classDef stateStyle fill:#fff4e6,stroke:#e67700,color:#e67700
+    classDef extStyle fill:#d3f9d8,stroke:#2f9e44,color:#2f9e44
+    classDef svcStyle fill:#c5f6fa,stroke:#0c8599,color:#0c8599
+    classDef externalStyle fill:#f1f3f5,stroke:#868e96,color:#495057
+
+    class WebUI,TUI,CLI,BotCh clientStyle
+    class AuthMW,SPA,WS,AdminAPI adminStyle
+    class BotEP,VoiceEP,RuntimeProxy runtimeStyle
+    class CopilotSDK,EventH,PromptB,Tools,HITL,AITL,PolicyB,MCP,Sched,Sandbox agentStyle
+    class Sessions,Memory,GuardDB,PluginDB,MCPDB,AuditLog,SandboxCfg stateStyle
+    class Skills,Plugins extStyle
+    class AzureSvc,GHAuth,CFTunnel,KVSvc,OTel,PromptShield,SecPreflight svcStyle
+    class AzureBot,ACS,ACA,AKV,AzureMonitor,AIShield,M365,GHCopilot,CF externalStyle
+```
+
+---
+
+## Layer Reference
+
+| Layer | Color | Components |
+|---|---|---|
+| **Client Interfaces** | Blue | React Web UI, Terminal UI, CLI, Bot Channels |
+| **Admin Server** | Purple | Auth Middleware, REST API (22 routes), WebSocket |
+| **Runtime Server** | Orange | Bot/Voice Endpoints, Runtime Proxy |
+| **Agent Core** | Indigo | Copilot SDK, Event Handler, Tools, HITL/AITL, Guardrails, MCP, Scheduler, Sandbox |
+| **State & Persistence** | Yellow | Session Store, Memory, Audit Log, all config stores |
+| **Extensibility** | Green | Skills (Markdown files), Plugins (packaged code) |
+| **Services Layer** | Cyan | Azure, GitHub, Cloudflare, OTel, Security |
+| **External Services** | Gray | Azure Bot, ACS, ACA, Key Vault, GitHub, M365 |
+
+## Key Design Patterns
+
+- **Admin / Runtime isolation** — Admin server proxies to Runtime; separate credential directories and identities
+- **HITL / AITL gates** — Every tool call can be intercepted for human or AI approval before execution
+- **Pluggable extensibility** — Skills (Markdown) and Plugins (code) are loaded dynamically at runtime without redeployment
+- **MCP integration** — Playwright MCP + custom MCP servers extend the agent's tool surface
+- **Layered security** — Guardrails → Policy Bridge → Prompt Shield → Security Preflight → RBAC
+- **Deployment parity** — Identical image runs locally (Docker Compose) and in Azure Container Apps

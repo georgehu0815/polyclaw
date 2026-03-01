@@ -1,0 +1,70 @@
+{
+  "servers": {
+    "playwright": {
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "chromium",
+        "--headless",
+        "--isolated",
+        "--viewport-size",
+        "1366x768"
+      ],
+      "env": {
+        "PLAYWRIGHT_CHROMIUM_ARGS": "--no-sandbox --disable-setuid-sandbox"
+      },
+      "tools": [
+        "*"
+      ],
+      "enabled": true,
+      "builtin": true,
+      "description": "Browser automation via Playwright MCP"
+    },
+    "microsoft-learn": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp",
+      "tools": [
+        "*"
+      ],
+      "enabled": false,
+      "builtin": true,
+      "description": "Search and fetch official Microsoft Learn documentation"
+    },
+    "azure-mcp-server": {
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@azure/mcp@latest",
+        "server",
+        "start"
+      ],
+      "env": {
+        "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT": "1"
+      },
+      "tools": [
+        "*"
+      ],
+      "enabled": false,
+      "builtin": true,
+      "description": "Manage Azure resources via the Azure MCP Server (requires az login)"
+    },
+    "github-mcp-server": {
+      "type": "local",
+      "command": "sh",
+      "args": [
+        "-c",
+        "GITHUB_PERSONAL_ACCESS_TOKEN=${GITHUB_PERSONAL_ACCESS_TOKEN:-$(gh auth token)} npx -y @github/mcp-server"
+      ],
+      "tools": [
+        "*"
+      ],
+      "enabled": false,
+      "builtin": true,
+      "description": "GitHub API integration (uses gh CLI auth or GITHUB_PERSONAL_ACCESS_TOKEN)"
+    }
+  }
+}

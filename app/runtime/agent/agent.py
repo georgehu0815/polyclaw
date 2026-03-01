@@ -9,7 +9,7 @@ from collections.abc import Callable
 from time import monotonic as _now
 from typing import Any
 
-from copilot import CopilotClient
+from copilot import CopilotClient, PermissionHandler
 
 from ..config.settings import cfg
 from ..sandbox import SandboxExecutor, SandboxToolInterceptor
@@ -64,12 +64,17 @@ class Agent:
     async def start(self) -> None:
         cfg.ensure_dirs()
         opts: dict[str, Any] = {"log_level": "error"}
-        if cfg.github_token:
+        agency_path = cfg.agency_cli_path
+        if agency_path and __import__("os").path.isfile(agency_path):
+            opts["cli_path"] = agency_path
+            opts["cli_args"] = ["copilot"]
+            logger.info("[agent.start] using agency CLI: %s", agency_path)
+        elif cfg.github_token:
             opts["github_token"] = cfg.github_token
             logger.info("[agent.start] GITHUB_TOKEN provided (%d chars)", len(cfg.github_token))
         else:
             logger.warning(
-                "[agent.start] No GITHUB_TOKEN found -- Copilot CLI will try the "
+                "[agent.start] No GITHUB_TOKEN or agency CLI found -- Copilot CLI will try the "
                 "logged-in gh session (may fail in containers)"
             )
 
@@ -417,6 +422,7 @@ class Agent:
             "model": cfg.copilot_model,
             "streaming": True,
             "tools": get_all_tools(),
+            "on_permission_request": PermissionHandler.approve_all,
             "system_message": {
                 "mode": "replace",
                 "content": build_system_prompt(),

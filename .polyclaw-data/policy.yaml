@@ -1,0 +1,9 @@
+apiVersion: agent-policy/v1
+kind: PolicySet
+metadata:
+  name: polyclaw-guardrails
+  description: Guardrails disabled -- all tools allowed.
+defaults:
+  effect: allow
+  channel: chat
+policies: []

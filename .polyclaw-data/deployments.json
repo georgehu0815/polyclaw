@@ -1,0 +1,17 @@
+{
+  "deployments": {
+    "bdc1207d": {
+      "deploy_id": "bdc1207d",
+      "tag": "polycl-bdc1207d",
+      "kind": "local",
+      "created_at": "2026-03-01T23:23:58.641724+00:00",
+      "updated_at": "2026-03-01T23:24:01.772519+00:00",
+      "status": "active",
+      "resource_groups": [
+        "polyclaw-rg"
+      ],
+      "resources": [],
+      "config": {}
+    }
+  }
+}

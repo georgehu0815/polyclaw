@@ -125,7 +125,7 @@ class SetupRoutes:
 
     async def copilot_status(self, _req: web.Request) -> web.Response:
         info = self._gh.status()
-        if info.get("authenticated") and not cfg.github_token:
+        if info.get("authenticated") and not cfg.github_token and info.get("auth_method") != "agency":
             token = self._gh.extract_token()
             if token:
                 cfg.write_env(GITHUB_TOKEN=token)

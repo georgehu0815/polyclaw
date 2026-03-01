@@ -11,9 +11,12 @@ These are needed regardless of which deployment target you choose.
 
 | Dependency | Version | Purpose |
 |---|---|---|
+| [Agency](https://aka.ms/agency) | latest | LLM authentication (GitHub Copilot via Agency CLI) |
 | [Bun](https://bun.sh) | latest | Runs the TUI (`app/tui`) |
 | [Docker](https://www.docker.com/) | 20+ | Builds and runs the Polyclaw container |
 | Git | any | Cloning the repository |
+
+> **Agency is the recommended authentication method.** See [Agency Authentication](/getting-started/agency-auth/) for installation and setup. If Agency is not available, Polyclaw falls back to `GITHUB_TOKEN` or `gh auth login`.
 
 The TUI installs its own Node dependencies automatically via `bun install` on first run.
 

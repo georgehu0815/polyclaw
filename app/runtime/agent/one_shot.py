@@ -8,10 +8,11 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import os
 from collections.abc import Awaitable, Callable
 from typing import Any
 
-from copilot import CopilotClient
+from copilot import CopilotClient, PermissionHandler
 from copilot.generated.session_events import SessionEventType
 
 from ..config.settings import cfg
@@ -37,7 +38,11 @@ async def run_one_shot(
     on_pre_tool_use: PreToolHook | None = None,
 ) -> str | None:
     opts: dict[str, Any] = {"log_level": "error"}
-    if cfg.github_token:
+    agency_path = cfg.agency_cli_path
+    if agency_path and os.path.isfile(agency_path):
+        opts["cli_path"] = agency_path
+        opts["cli_args"] = ["copilot"]
+    elif cfg.github_token:
         opts["github_token"] = cfg.github_token
 
     hook = on_pre_tool_use or auto_approve
@@ -46,6 +51,7 @@ async def run_one_shot(
     try:
         session_cfg: dict[str, Any] = {
             "model": model,
+            "on_permission_request": PermissionHandler.approve_all,
             "hooks": {"on_pre_tool_use": hook},
         }
         if system_message:

@@ -1,0 +1,749 @@
+<frozen runpy>:128: RuntimeWarning: 'app.runtime.server.app' found in sys.modules after import of package 'app.runtime.server', but prior to execution of 'app.runtime.server.app'; this may result in unpredictable behaviour
+2026-03-01 18:25:29,985  __main__  INFO  Starting server in combined mode on port 9090 ...
+2026-03-01 18:25:29,985  __main__  INFO  Admin UI: http://localhost:9090/?secret=pBaalb29DugnYQiLqKj9Q97FICBbsZF4
+
+  --> http://localhost:9090/?secret=pBaalb29DugnYQiLqKj9Q97FICBbsZF4
+
+2026-03-01 18:25:30,159  app.runtime.server.wiring  INFO  [init_core] creating Agent ...
+2026-03-01 18:25:30,159  app.runtime.server.wiring  INFO  [init_core] starting Agent (Copilot CLI) ...
+2026-03-01 18:25:30,160  app.runtime.agent.agent  WARNING  [agent.start] No GITHUB_TOKEN found -- Copilot CLI will try the logged-in gh session (may fail in containers)
+2026-03-01 18:25:30,160  app.runtime.agent.agent  INFO  [agent.start] attempt 1/3 -- creating CopilotClient
+2026-03-01 18:25:30,160  app.runtime.agent.agent  INFO  [agent.start] calling client.start() ...
+2026-03-01 18:25:30,648  app.runtime.agent.agent  INFO  [agent.start] Copilot CLI started successfully
+2026-03-01 18:25:31,086  app.runtime.agent.agent  INFO  [agent.auth] authenticated as georgehu_microsoft
+2026-03-01 18:25:31,612  app.runtime.agent.agent  INFO  [agent.model] model claude-sonnet-4.6 is available (policy=enabled)
+2026-03-01 18:25:31,612  app.runtime.server.wiring  INFO  [init_core] Agent started successfully
+2026-03-01 18:25:31,613  app.runtime.server.wiring  INFO  [init_core] core initialization complete
+2026-03-01 18:25:31,627  app.runtime.server.wiring  INFO  Voice call not configured (ACS/AOAI settings missing)
+2026-03-01 18:25:31,647  app.runtime.services.security.prompt_shield  INFO  [prompt_shield.init] endpoint=(none) configured=False
+2026-03-01 18:25:31,648  app.runtime.registries.plugins  INFO  Discovered 4 plugin(s)
+2026-03-01 18:25:31,653  __main__  INFO  Adapter rebuilt: app_id=(none), tenant=(none), password=MISSING
+2026-03-01 18:25:31,653  app.runtime.server.lifecycle  INFO  [startup.runtime] mode=combined lockdown=False bot_configured=True telegram_configured=False tunnel=True provisioner=True az=True
+2026-03-01 18:25:31,653  app.runtime.server.lifecycle  INFO  Startup: provisioning infrastructure from config ...
+2026-03-01 18:25:31,653  app.runtime.services.deployment.provisioner  INFO  Provisioning started
+2026-03-01 18:25:31,653  app.runtime.scheduler.engine  INFO  [scheduler] loop started (interval=60s, notify_cb=SET)
+2026-03-01 18:25:31,653  app.runtime.messaging.proactive_loop  INFO  [proactive] delivery loop started (interval=60s)
+2026-03-01 18:25:31,654  app.runtime.state.deploy_state  INFO  Registered deployment 79b8a9f0 (kind=local, tag=polycl-79b8a9f0)
+2026-03-01 18:25:31,654  app.runtime.services.deployment.provisioner  INFO  Created new local deployment record: 79b8a9f0
+2026-03-01 18:25:31,654  app.runtime.services.deployment.provisioner  INFO  Provision step 1/2: Registering Entra ID app...
+2026-03-01 18:25:31,654  app.runtime.services.deployment.deployer  INFO  Registering Entra app: rg=polyclaw-rg, location=eastus, display_name=polyclaw
+2026-03-01 18:25:31,654  app.runtime.services.deployment.deployer  INFO  Step 1/3: Creating resource group 'polyclaw-rg' in 'eastus'...
+2026-03-01 18:25:31,654  app.runtime.services.cloud.azure  INFO  [az] starting: az group create --name polyclaw-rg --location
+2026-03-01 18:25:33,373  app.runtime.services.cloud.azure  INFO  [az] OK (1.7s): az group create --name polyclaw-rg --location
+2026-03-01 18:25:33,373  app.runtime.services.deployment.deployer  INFO  Step 2/3: Registering app 'polyclaw'...
+2026-03-01 18:25:33,373  app.runtime.services.cloud.azure  INFO  [az] starting: az ad app list --display-name polyclaw
+2026-03-01 18:25:34,563  app.runtime.services.cloud.azure  WARNING  [az] FAILED (1.2s, rc=1): az ad app list --display-name polyclaw -- ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 90905ba7-415d-496e-bfb1-16edd12e8a00 Correlation ID: 5b2e2b13-cf7c-4328-99bc-9ea14bdd9fbf Timestamp: 2026-03-01 23:25:34Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default"
+2026-03-01 18:25:34,563  app.runtime.services.cloud.azure  INFO  [az] starting: az ad app create --display-name polyclaw
+2026-03-01 18:25:34,964  app.runtime.services.cloud.azure  WARNING  [az] FAILED (0.4s, rc=1): az ad app create --display-name polyclaw -- ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 90905ba7-415d-496e-bfb1-16edd12e8a00 Correlation ID: 5b2e2b13-cf7c-4328-99bc-9ea14bdd9fbf Timestamp: 2026-03-01 23:25:34Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default"
+2026-03-01 18:25:34,964  app.runtime.services.deployment.provisioner  ERROR  Provisioning aborted: app registration failed
+2026-03-01 18:25:34,968  __main__  INFO  Adapter rebuilt: app_id=(none), tenant=(none), password=MISSING
+2026-03-01 18:25:34,968  app.runtime.server.lifecycle  INFO    provision: resource_group = ok ()
+2026-03-01 18:25:34,968  app.runtime.server.lifecycle  INFO    provision: app_registration = failed (App registration failed: ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 90905ba7-415d-496e-bfb1-16edd12e8a00 Correlation ID: 5b2e2b13-cf7c-4328-99bc-9ea14bdd9fbf Timestamp: 2026-03-01 23:25:34Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default")
+2026-03-01 18:25:34,969  app.runtime.services.cloud.azure  INFO  [az] starting: az group list --query [].name
+2026-03-01 18:25:35,787  app.runtime.services.cloud.azure  INFO  [az] OK (0.8s): az group list --query [].name
+2026-03-01 18:25:35,787  app.runtime.services.resource_tracker  INFO  Reconcile: all 1 active deployment(s) verified
+======== Running on http://0.0.0.0:9090 ========
+(Press CTRL+C to quit)
+<frozen runpy>:128: RuntimeWarning: 'app.runtime.server.app' found in sys.modules after import of package 'app.runtime.server', but prior to execution of 'app.runtime.server.app'; this may result in unpredictable behaviour
+2026-03-01 18:26:48,825  __main__  INFO  Starting server in combined mode on port 9090 ...
+2026-03-01 18:26:48,825  __main__  INFO  Admin UI: http://localhost:9090/?secret=pBaalb29DugnYQiLqKj9Q97FICBbsZF4
+
+  --> http://localhost:9090/?secret=pBaalb29DugnYQiLqKj9Q97FICBbsZF4
+
+2026-03-01 18:26:48,998  app.runtime.server.wiring  INFO  [init_core] creating Agent ...
+2026-03-01 18:26:48,999  app.runtime.server.wiring  INFO  [init_core] starting Agent (Copilot CLI) ...
+2026-03-01 18:26:48,999  app.runtime.agent.agent  WARNING  [agent.start] No GITHUB_TOKEN found -- Copilot CLI will try the logged-in gh session (may fail in containers)
+2026-03-01 18:26:48,999  app.runtime.agent.agent  INFO  [agent.start] attempt 1/3 -- creating CopilotClient
+2026-03-01 18:26:48,999  app.runtime.agent.agent  INFO  [agent.start] calling client.start() ...
+2026-03-01 18:26:49,502  app.runtime.agent.agent  INFO  [agent.start] Copilot CLI started successfully
+2026-03-01 18:26:49,939  app.runtime.agent.agent  INFO  [agent.auth] authenticated as georgehu_microsoft
+2026-03-01 18:26:50,194  app.runtime.agent.agent  INFO  [agent.model] model claude-sonnet-4.6 is available (policy=enabled)
+2026-03-01 18:26:50,194  app.runtime.server.wiring  INFO  [init_core] Agent started successfully
+2026-03-01 18:26:50,195  app.runtime.server.wiring  INFO  [init_core] core initialization complete
+2026-03-01 18:26:50,206  app.runtime.server.wiring  INFO  Voice call not configured (ACS/AOAI settings missing)
+2026-03-01 18:26:50,225  app.runtime.services.security.prompt_shield  INFO  [prompt_shield.init] endpoint=(none) configured=False
+2026-03-01 18:26:50,227  app.runtime.registries.plugins  INFO  Discovered 4 plugin(s)
+2026-03-01 18:26:50,233  __main__  INFO  Adapter rebuilt: app_id=(none), tenant=(none), password=MISSING
+2026-03-01 18:26:50,233  app.runtime.server.lifecycle  INFO  [startup.runtime] mode=combined lockdown=False bot_configured=True telegram_configured=False tunnel=True provisioner=True az=True
+2026-03-01 18:26:50,233  app.runtime.server.lifecycle  INFO  Startup: provisioning infrastructure from config ...
+2026-03-01 18:26:50,233  app.runtime.services.deployment.provisioner  INFO  Provisioning started
+2026-03-01 18:26:50,233  app.runtime.services.deployment.provisioner  INFO  Provision step 1/2: Registering Entra ID app...
+2026-03-01 18:26:50,233  app.runtime.services.deployment.deployer  INFO  Registering Entra app: rg=polyclaw-rg, location=eastus, display_name=polyclaw
+2026-03-01 18:26:50,233  app.runtime.services.deployment.deployer  INFO  Step 1/3: Creating resource group 'polyclaw-rg' in 'eastus'...
+2026-03-01 18:26:50,233  app.runtime.services.cloud.azure  INFO  [az] starting: az group create --name polyclaw-rg --location
+2026-03-01 18:26:50,233  app.runtime.scheduler.engine  INFO  [scheduler] loop started (interval=60s, notify_cb=SET)
+2026-03-01 18:26:50,233  app.runtime.messaging.proactive_loop  INFO  [proactive] delivery loop started (interval=60s)
+2026-03-01 18:26:52,155  app.runtime.services.cloud.azure  INFO  [az] OK (1.9s): az group create --name polyclaw-rg --location
+2026-03-01 18:26:52,156  app.runtime.services.deployment.deployer  INFO  Step 2/3: Registering app 'polyclaw'...
+2026-03-01 18:26:52,156  app.runtime.services.cloud.azure  INFO  [az] starting: az ad app list --display-name polyclaw
+2026-03-01 18:26:53,232  app.runtime.services.cloud.azure  WARNING  [az] FAILED (1.1s, rc=1): az ad app list --display-name polyclaw -- ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 453e2fb8-8224-4ea4-85e5-cf111fe25c00 Correlation ID: 9d2b8945-8bbc-47af-ab02-b1b9c2d34443 Timestamp: 2026-03-01 23:26:52Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default"
+2026-03-01 18:26:53,232  app.runtime.services.cloud.azure  INFO  [az] starting: az ad app create --display-name polyclaw
+2026-03-01 18:26:53,583  app.runtime.services.cloud.azure  WARNING  [az] FAILED (0.4s, rc=1): az ad app create --display-name polyclaw -- ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 453e2fb8-8224-4ea4-85e5-cf111fe25c00 Correlation ID: 9d2b8945-8bbc-47af-ab02-b1b9c2d34443 Timestamp: 2026-03-01 23:26:52Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default"
+2026-03-01 18:26:53,583  app.runtime.services.deployment.provisioner  ERROR  Provisioning aborted: app registration failed
+2026-03-01 18:26:53,587  __main__  INFO  Adapter rebuilt: app_id=(none), tenant=(none), password=MISSING
+2026-03-01 18:26:53,587  app.runtime.server.lifecycle  INFO    provision: resource_group = ok ()
+2026-03-01 18:26:53,587  app.runtime.server.lifecycle  INFO    provision: app_registration = failed (App registration failed: ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 453e2fb8-8224-4ea4-85e5-cf111fe25c00 Correlation ID: 9d2b8945-8bbc-47af-ab02-b1b9c2d34443 Timestamp: 2026-03-01 23:26:52Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default")
+2026-03-01 18:26:53,587  app.runtime.services.cloud.azure  INFO  [az] starting: az group list --query [].name
+2026-03-01 18:26:54,417  app.runtime.services.cloud.azure  INFO  [az] OK (0.8s): az group list --query [].name
+2026-03-01 18:26:54,417  app.runtime.services.resource_tracker  INFO  Reconcile: all 1 active deployment(s) verified
+======== Running on http://0.0.0.0:9090 ========
+(Press CTRL+C to quit)
+<frozen runpy>:128: RuntimeWarning: 'app.runtime.server.app' found in sys.modules after import of package 'app.runtime.server', but prior to execution of 'app.runtime.server.app'; this may result in unpredictable behaviour
+2026-03-01 18:43:50,260  __main__  INFO  Starting server in combined mode on port 9090 ...
+2026-03-01 18:43:50,260  __main__  INFO  Admin UI: http://localhost:9090/?secret=pBaalb29DugnYQiLqKj9Q97FICBbsZF4
+
+  --> http://localhost:9090/?secret=pBaalb29DugnYQiLqKj9Q97FICBbsZF4
+
+2026-03-01 18:43:50,435  app.runtime.server.wiring  INFO  [init_core] creating Agent ...
+2026-03-01 18:43:50,435  app.runtime.server.wiring  INFO  [init_core] starting Agent (Copilot CLI) ...
+2026-03-01 18:43:50,435  app.runtime.agent.agent  INFO  [agent.start] using agency CLI: /Users/ghu/.config/agency/CurrentVersion/agency
+2026-03-01 18:43:50,435  app.runtime.agent.agent  INFO  [agent.start] attempt 1/3 -- creating CopilotClient
+2026-03-01 18:43:50,436  app.runtime.agent.agent  INFO  [agent.start] calling client.start() ...
+2026-03-01 18:43:51,361  app.runtime.agent.agent  INFO  [agent.start] Copilot CLI started successfully
+2026-03-01 18:43:51,749  app.runtime.agent.agent  INFO  [agent.auth] authenticated as georgehu_microsoft
+2026-03-01 18:43:51,972  app.runtime.agent.agent  INFO  [agent.model] model claude-sonnet-4.6 is available (policy=enabled)
+2026-03-01 18:43:51,972  app.runtime.server.wiring  INFO  [init_core] Agent started successfully
+2026-03-01 18:43:51,977  app.runtime.server.wiring  INFO  [init_core] core initialization complete
+2026-03-01 18:43:51,991  app.runtime.server.wiring  INFO  Voice call not configured (ACS/AOAI settings missing)
+2026-03-01 18:43:52,011  app.runtime.services.security.prompt_shield  INFO  [prompt_shield.init] endpoint=(none) configured=False
+2026-03-01 18:43:52,012  app.runtime.registries.plugins  INFO  Discovered 4 plugin(s)
+2026-03-01 18:43:52,019  __main__  INFO  Adapter rebuilt: app_id=(none), tenant=(none), password=MISSING
+2026-03-01 18:43:52,019  app.runtime.server.lifecycle  INFO  [startup.runtime] mode=combined lockdown=False bot_configured=True telegram_configured=False tunnel=True provisioner=True az=True
+2026-03-01 18:43:52,019  app.runtime.server.lifecycle  INFO  Startup: provisioning infrastructure from config ...
+2026-03-01 18:43:52,019  app.runtime.services.deployment.provisioner  INFO  Provisioning started
+2026-03-01 18:43:52,019  app.runtime.services.deployment.provisioner  INFO  Provision step 1/2: Registering Entra ID app...
+2026-03-01 18:43:52,019  app.runtime.services.deployment.deployer  INFO  Registering Entra app: rg=polyclaw-rg, location=eastus, display_name=polyclaw
+2026-03-01 18:43:52,019  app.runtime.services.deployment.deployer  INFO  Step 1/3: Creating resource group 'polyclaw-rg' in 'eastus'...
+2026-03-01 18:43:52,019  app.runtime.services.cloud.azure  INFO  [az] starting: az group create --name polyclaw-rg --location
+2026-03-01 18:43:52,019  app.runtime.scheduler.engine  INFO  [scheduler] loop started (interval=60s, notify_cb=SET)
+2026-03-01 18:43:52,019  app.runtime.messaging.proactive_loop  INFO  [proactive] delivery loop started (interval=60s)
+2026-03-01 18:43:53,725  app.runtime.services.cloud.azure  INFO  [az] OK (1.7s): az group create --name polyclaw-rg --location
+2026-03-01 18:43:53,726  app.runtime.services.deployment.deployer  INFO  Step 2/3: Registering app 'polyclaw'...
+2026-03-01 18:43:53,726  app.runtime.services.cloud.azure  INFO  [az] starting: az ad app list --display-name polyclaw
+2026-03-01 18:43:55,018  app.runtime.services.cloud.azure  WARNING  [az] FAILED (1.3s, rc=1): az ad app list --display-name polyclaw -- ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 088231f1-6b1e-4a3d-8935-f6ce28107900 Correlation ID: 1b20705a-9661-4961-88dc-6150b4b68667 Timestamp: 2026-03-01 23:43:54Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default"
+2026-03-01 18:43:55,018  app.runtime.services.cloud.azure  INFO  [az] starting: az ad app create --display-name polyclaw
+2026-03-01 18:43:55,415  app.runtime.services.cloud.azure  WARNING  [az] FAILED (0.4s, rc=1): az ad app create --display-name polyclaw -- ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 088231f1-6b1e-4a3d-8935-f6ce28107900 Correlation ID: 1b20705a-9661-4961-88dc-6150b4b68667 Timestamp: 2026-03-01 23:43:54Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default"
+2026-03-01 18:43:55,415  app.runtime.services.deployment.provisioner  ERROR  Provisioning aborted: app registration failed
+2026-03-01 18:43:55,420  __main__  INFO  Adapter rebuilt: app_id=(none), tenant=(none), password=MISSING
+2026-03-01 18:43:55,421  app.runtime.server.lifecycle  INFO    provision: resource_group = ok ()
+2026-03-01 18:43:55,421  app.runtime.server.lifecycle  INFO    provision: app_registration = failed (App registration failed: ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 088231f1-6b1e-4a3d-8935-f6ce28107900 Correlation ID: 1b20705a-9661-4961-88dc-6150b4b68667 Timestamp: 2026-03-01 23:43:54Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default")
+2026-03-01 18:43:55,421  app.runtime.services.cloud.azure  INFO  [az] starting: az group list --query [].name
+2026-03-01 18:43:56,297  app.runtime.services.cloud.azure  INFO  [az] OK (0.9s): az group list --query [].name
+2026-03-01 18:43:56,297  app.runtime.services.resource_tracker  INFO  Reconcile: all 1 active deployment(s) verified
+2026-03-01 18:44:04,028  aiohttp.access  INFO  127.0.0.1 GET / 200 0.002s
+2026-03-01 18:44:04,063  aiohttp.access  INFO  127.0.0.1 GET /assets/index-z_Z6Olni.js 200 0.003s
+2026-03-01 18:44:04,065  aiohttp.access  INFO  127.0.0.1 GET /assets/index-CS8BWm3H.css 200 0.004s
+2026-03-01 18:44:04,115  aiohttp.access  INFO  127.0.0.1 POST /api/auth/check 200 0.000s
+2026-03-01 18:44:04,874  aiohttp.access  INFO  127.0.0.1 GET /favicon.ico 200 0.001s
+2026-03-01 18:44:06,391  aiohttp.access  INFO  127.0.0.1 GET /api/profile 200 0.013s
+2026-03-01 18:44:06,392  aiohttp.access  INFO  127.0.0.1 GET /headertext.png 200 0.018s
+2026-03-01 18:44:06,392  aiohttp.access  INFO  127.0.0.1 GET /logo.png 200 0.015s
+2026-03-01 18:44:06,394  aiohttp.access  INFO  127.0.0.1 GET /assets/SetupWizard-DXIablkB.js 200 0.016s
+2026-03-01 18:44:06,872  aiohttp.access  INFO  127.0.0.1 GET /api/setup/voice/config 200 0.000s
+2026-03-01 18:44:07,080  aiohttp.access  INFO  127.0.0.1 GET /api/sandbox/config 200 0.000s
+2026-03-01 18:44:07,081  aiohttp.access  INFO  127.0.0.1 GET /api/setup/voice/config 200 0.000s
+2026-03-01 18:44:07,081  aiohttp.access  INFO  127.0.0.1 GET /api/foundry-iq/config 200 0.000s
+2026-03-01 18:44:07,083  aiohttp.access  INFO  127.0.0.1 GET /api/content-safety/status 200 0.000s
+2026-03-01 18:44:07,083  aiohttp.access  INFO  127.0.0.1 GET /api/sandbox/config 200 0.000s
+2026-03-01 18:44:07,084  aiohttp.access  INFO  127.0.0.1 GET /api/foundry-iq/config 200 0.000s
+2026-03-01 18:44:07,085  aiohttp.access  INFO  127.0.0.1 GET /api/content-safety/status 200 0.000s
+======== Running on http://0.0.0.0:9090 ========
+(Press CTRL+C to quit)
+<frozen runpy>:128: RuntimeWarning: 'app.runtime.server.app' found in sys.modules after import of package 'app.runtime.server', but prior to execution of 'app.runtime.server.app'; this may result in unpredictable behaviour
+2026-03-01 18:48:03,926  __main__  INFO  Starting server in combined mode on port 9090 ...
+2026-03-01 18:48:03,926  __main__  INFO  Admin UI: http://localhost:9090/?secret=pBaalb29DugnYQiLqKj9Q97FICBbsZF4
+
+  --> http://localhost:9090/?secret=pBaalb29DugnYQiLqKj9Q97FICBbsZF4
+
+2026-03-01 18:48:04,107  app.runtime.server.wiring  INFO  [init_core] creating Agent ...
+2026-03-01 18:48:04,108  app.runtime.server.wiring  INFO  [init_core] starting Agent (Copilot CLI) ...
+2026-03-01 18:48:04,108  app.runtime.agent.agent  INFO  [agent.start] using agency CLI: /Users/ghu/.config/agency/CurrentVersion/agency
+2026-03-01 18:48:04,108  app.runtime.agent.agent  INFO  [agent.start] attempt 1/3 -- creating CopilotClient
+2026-03-01 18:48:04,108  app.runtime.agent.agent  INFO  [agent.start] calling client.start() ...
+2026-03-01 18:48:04,967  app.runtime.agent.agent  INFO  [agent.start] Copilot CLI started successfully
+2026-03-01 18:48:05,338  app.runtime.agent.agent  INFO  [agent.auth] authenticated as georgehu_microsoft
+2026-03-01 18:48:05,833  app.runtime.agent.agent  INFO  [agent.model] model claude-sonnet-4.6 is available (policy=enabled)
+2026-03-01 18:48:05,833  app.runtime.server.wiring  INFO  [init_core] Agent started successfully
+2026-03-01 18:48:05,837  app.runtime.server.wiring  INFO  [init_core] core initialization complete
+2026-03-01 18:48:05,852  app.runtime.server.wiring  INFO  Voice call not configured (ACS/AOAI settings missing)
+2026-03-01 18:48:05,874  app.runtime.services.security.prompt_shield  INFO  [prompt_shield.init] endpoint=(none) configured=False
+2026-03-01 18:48:05,876  app.runtime.registries.plugins  INFO  Discovered 4 plugin(s)
+2026-03-01 18:48:05,881  __main__  INFO  Adapter rebuilt: app_id=(none), tenant=(none), password=MISSING
+2026-03-01 18:48:05,881  app.runtime.server.lifecycle  INFO  [startup.runtime] mode=combined lockdown=False bot_configured=True telegram_configured=False tunnel=True provisioner=True az=True
+2026-03-01 18:48:05,881  app.runtime.server.lifecycle  INFO  Startup: provisioning infrastructure from config ...
+2026-03-01 18:48:05,881  app.runtime.services.deployment.provisioner  INFO  Provisioning started
+2026-03-01 18:48:05,882  app.runtime.services.deployment.provisioner  INFO  Provision step 1/2: Registering Entra ID app...
+2026-03-01 18:48:05,882  app.runtime.services.deployment.deployer  INFO  Registering Entra app: rg=polyclaw-rg, location=eastus, display_name=polyclaw
+2026-03-01 18:48:05,882  app.runtime.services.deployment.deployer  INFO  Step 1/3: Creating resource group 'polyclaw-rg' in 'eastus'...
+2026-03-01 18:48:05,882  app.runtime.services.cloud.azure  INFO  [az] starting: az group create --name polyclaw-rg --location
+2026-03-01 18:48:05,882  app.runtime.scheduler.engine  INFO  [scheduler] loop started (interval=60s, notify_cb=SET)
+2026-03-01 18:48:05,882  app.runtime.messaging.proactive_loop  INFO  [proactive] delivery loop started (interval=60s)
+2026-03-01 18:48:08,017  app.runtime.services.cloud.azure  INFO  [az] OK (2.1s): az group create --name polyclaw-rg --location
+2026-03-01 18:48:08,017  app.runtime.services.deployment.deployer  INFO  Step 2/3: Registering app 'polyclaw'...
+2026-03-01 18:48:08,017  app.runtime.services.cloud.azure  INFO  [az] starting: az ad app list --display-name polyclaw
+2026-03-01 18:48:09,000  app.runtime.services.cloud.azure  WARNING  [az] FAILED (1.0s, rc=1): az ad app list --display-name polyclaw -- ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: b1b0c69b-9094-4f8d-b3ef-fa2296736a00 Correlation ID: deb8085f-560c-4cc6-9ee1-f6daab7a4aab Timestamp: 2026-03-01 23:48:08Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default"
+2026-03-01 18:48:09,000  app.runtime.services.cloud.azure  INFO  [az] starting: az ad app create --display-name polyclaw
+2026-03-01 18:48:09,397  app.runtime.services.cloud.azure  WARNING  [az] FAILED (0.4s, rc=1): az ad app create --display-name polyclaw -- ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: b1b0c69b-9094-4f8d-b3ef-fa2296736a00 Correlation ID: deb8085f-560c-4cc6-9ee1-f6daab7a4aab Timestamp: 2026-03-01 23:48:08Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default"
+2026-03-01 18:48:09,398  app.runtime.services.deployment.provisioner  ERROR  Provisioning aborted: app registration failed
+2026-03-01 18:48:09,403  __main__  INFO  Adapter rebuilt: app_id=(none), tenant=(none), password=MISSING
+2026-03-01 18:48:09,403  app.runtime.server.lifecycle  INFO    provision: resource_group = ok ()
+2026-03-01 18:48:09,403  app.runtime.server.lifecycle  INFO    provision: app_registration = failed (App registration failed: ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: b1b0c69b-9094-4f8d-b3ef-fa2296736a00 Correlation ID: deb8085f-560c-4cc6-9ee1-f6daab7a4aab Timestamp: 2026-03-01 23:48:08Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default")
+2026-03-01 18:48:09,403  app.runtime.services.cloud.azure  INFO  [az] starting: az group list --query [].name
+2026-03-01 18:48:10,384  app.runtime.services.cloud.azure  INFO  [az] OK (1.0s): az group list --query [].name
+2026-03-01 18:48:10,384  app.runtime.services.resource_tracker  INFO  Reconcile: all 1 active deployment(s) verified
+======== Running on http://0.0.0.0:9090 ========
+(Press CTRL+C to quit)
+<frozen runpy>:128: RuntimeWarning: 'app.runtime.server.app' found in sys.modules after import of package 'app.runtime.server', but prior to execution of 'app.runtime.server.app'; this may result in unpredictable behaviour
+2026-03-01 18:50:56,054  __main__  INFO  Starting server in combined mode on port 9090 ...
+2026-03-01 18:50:56,054  __main__  INFO  Admin UI: http://localhost:9090/?secret=pBaalb29DugnYQiLqKj9Q97FICBbsZF4
+
+  --> http://localhost:9090/?secret=pBaalb29DugnYQiLqKj9Q97FICBbsZF4
+
+2026-03-01 18:50:56,263  app.runtime.server.wiring  INFO  [init_core] creating Agent ...
+2026-03-01 18:50:56,263  app.runtime.server.wiring  INFO  [init_core] starting Agent (Copilot CLI) ...
+2026-03-01 18:50:56,263  app.runtime.agent.agent  INFO  [agent.start] using agency CLI: /Users/ghu/.config/agency/CurrentVersion/agency
+2026-03-01 18:50:56,263  app.runtime.agent.agent  INFO  [agent.start] attempt 1/3 -- creating CopilotClient
+2026-03-01 18:50:56,264  app.runtime.agent.agent  INFO  [agent.start] calling client.start() ...
+2026-03-01 18:50:57,205  app.runtime.agent.agent  INFO  [agent.start] Copilot CLI started successfully
+2026-03-01 18:50:57,634  app.runtime.agent.agent  INFO  [agent.auth] authenticated as georgehu_microsoft
+2026-03-01 18:50:57,856  app.runtime.agent.agent  INFO  [agent.model] model claude-sonnet-4.6 is available (policy=enabled)
+2026-03-01 18:50:57,857  app.runtime.server.wiring  INFO  [init_core] Agent started successfully
+2026-03-01 18:50:57,861  app.runtime.server.wiring  INFO  [init_core] core initialization complete
+2026-03-01 18:50:57,873  app.runtime.server.wiring  INFO  Voice call not configured (ACS/AOAI settings missing)
+2026-03-01 18:50:57,890  app.runtime.services.security.prompt_shield  INFO  [prompt_shield.init] endpoint=(none) configured=False
+2026-03-01 18:50:57,891  app.runtime.registries.plugins  INFO  Discovered 4 plugin(s)
+2026-03-01 18:50:57,896  __main__  INFO  Adapter rebuilt: app_id=(none), tenant=(none), password=MISSING
+2026-03-01 18:50:57,896  app.runtime.server.lifecycle  INFO  [startup.runtime] mode=combined lockdown=False bot_configured=True telegram_configured=False tunnel=True provisioner=True az=True
+2026-03-01 18:50:57,896  app.runtime.server.lifecycle  INFO  Startup: provisioning infrastructure from config ...
+2026-03-01 18:50:57,896  app.runtime.services.deployment.provisioner  INFO  Provisioning started
+2026-03-01 18:50:57,896  app.runtime.services.deployment.provisioner  INFO  Provision step 1/2: Registering Entra ID app...
+2026-03-01 18:50:57,897  app.runtime.services.deployment.deployer  INFO  Registering Entra app: rg=polyclaw-rg, location=eastus, display_name=polyclaw
+2026-03-01 18:50:57,897  app.runtime.services.deployment.deployer  INFO  Step 1/3: Creating resource group 'polyclaw-rg' in 'eastus'...
+2026-03-01 18:50:57,897  app.runtime.services.cloud.azure  INFO  [az] starting: az group create --name polyclaw-rg --location
+2026-03-01 18:50:57,896  app.runtime.scheduler.engine  INFO  [scheduler] loop started (interval=60s, notify_cb=SET)
+2026-03-01 18:50:57,897  app.runtime.messaging.proactive_loop  INFO  [proactive] delivery loop started (interval=60s)
+2026-03-01 18:50:59,729  app.runtime.services.cloud.azure  INFO  [az] OK (1.8s): az group create --name polyclaw-rg --location
+2026-03-01 18:50:59,729  app.runtime.services.deployment.deployer  INFO  Step 2/3: Registering app 'polyclaw'...
+2026-03-01 18:50:59,729  app.runtime.services.cloud.azure  INFO  [az] starting: az ad app list --display-name polyclaw
+2026-03-01 18:51:00,712  app.runtime.services.cloud.azure  WARNING  [az] FAILED (1.0s, rc=1): az ad app list --display-name polyclaw -- ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 87d4aa57-5a4b-4877-a3b1-7b0ab94c7f00 Correlation ID: e5731645-3397-4fa8-beb6-08d5256fa295 Timestamp: 2026-03-01 23:51:00Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default"
+2026-03-01 18:51:00,712  app.runtime.services.cloud.azure  INFO  [az] starting: az ad app create --display-name polyclaw
+2026-03-01 18:51:01,109  app.runtime.services.cloud.azure  WARNING  [az] FAILED (0.4s, rc=1): az ad app create --display-name polyclaw -- ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 87d4aa57-5a4b-4877-a3b1-7b0ab94c7f00 Correlation ID: e5731645-3397-4fa8-beb6-08d5256fa295 Timestamp: 2026-03-01 23:51:00Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default"
+2026-03-01 18:51:01,109  app.runtime.services.deployment.provisioner  ERROR  Provisioning aborted: app registration failed
+2026-03-01 18:51:01,115  __main__  INFO  Adapter rebuilt: app_id=(none), tenant=(none), password=MISSING
+2026-03-01 18:51:01,115  app.runtime.server.lifecycle  INFO    provision: resource_group = ok ()
+2026-03-01 18:51:01,115  app.runtime.server.lifecycle  INFO    provision: app_registration = failed (App registration failed: ERROR: AADSTS530084: Access has been blocked by conditional access token protection policy configured by this organization. To learn more, see https://aka.ms/TBCADocs. Trace ID: 87d4aa57-5a4b-4877-a3b1-7b0ab94c7f00 Correlation ID: e5731645-3397-4fa8-beb6-08d5256fa295 Timestamp: 2026-03-01 23:51:00Z
+Run the command below to authenticate interactively; additional arguments may be added as needed:
+az logout
+az login --tenant "72f988bf-86f1-41af-91ab-2d7cd011db47" --scope "https://graph.microsoft.com//.default")
+2026-03-01 18:51:01,115  app.runtime.services.cloud.azure  INFO  [az] starting: az group list --query [].name
+2026-03-01 18:51:01,938  app.runtime.services.cloud.azure  INFO  [az] OK (0.8s): az group list --query [].name
+2026-03-01 18:51:01,938  app.runtime.services.resource_tracker  INFO  Reconcile: all 1 active deployment(s) verified
+2026-03-01 18:51:08,739  aiohttp.access  INFO  127.0.0.1 GET / 200 0.003s
+2026-03-01 18:51:08,753  aiohttp.access  INFO  127.0.0.1 GET /assets/index-DJ4X6EUN.js 200 0.002s
+2026-03-01 18:51:08,762  aiohttp.access  INFO  127.0.0.1 GET /assets/index-CS8BWm3H.css 200 0.002s
+2026-03-01 18:51:08,791  aiohttp.access  INFO  127.0.0.1 POST /api/auth/check 200 0.000s
+2026-03-01 18:51:08,813  aiohttp.access  INFO  127.0.0.1 GET /api/profile 200 0.001s
+2026-03-01 18:51:08,815  aiohttp.access  INFO  127.0.0.1 GET /logo.png 200 0.002s
+2026-03-01 18:51:08,815  aiohttp.access  INFO  127.0.0.1 GET /headertext.png 200 0.002s
+2026-03-01 18:51:08,817  aiohttp.access  INFO  127.0.0.1 GET /assets/Chat-CpcCXaE3.js 200 0.002s
+2026-03-01 18:51:08,826  aiohttp.access  INFO  127.0.0.1 GET /api/chat/suggestions 200 0.000s
+2026-03-01 18:51:08,829  aiohttp.access  INFO  127.0.0.1 GET /api/skills 200 0.003s
+2026-03-01 18:51:08,829  aiohttp.access  INFO  127.0.0.1 GET /api/chat/models 200 0.000s
+2026-03-01 18:51:08,830  app.runtime.server.chat  INFO  [chat.handle] WebSocket connected from 127.0.0.1
+2026-03-01 18:51:12,283  app.runtime.server.chat  INFO  [chat.dispatch] action=send keys=['action', 'message']
+2026-03-01 18:51:12,283  app.runtime.server.chat  INFO  [chat.send_prompt] text='hi' session=(none)
+2026-03-01 18:51:12,283  app.runtime.server.chat  INFO  [chat.send_prompt] no active session, auto-creating 0ffee1af-d9d7-46cd-b001-c4a1c3de9e3f
+2026-03-01 18:51:12,284  app.runtime.server.chat  INFO  [chat.send_prompt] HITL emitter bound: model=claude-sonnet-4.6
+2026-03-01 18:51:12,284  app.runtime.server.chat  INFO  [chat.send_prompt] calling agent.send() ...
+2026-03-01 18:51:12,284  app.runtime.agent.agent  INFO  [agent.send] prompt='hi' (len=2), has_session=False
+2026-03-01 18:51:12,284  app.runtime.agent.agent  INFO  [agent.send] no session -- creating one
+2026-03-01 18:51:12,284  app.runtime.agent.agent  INFO  [agent.new_session] destroying old session ...
+2026-03-01 18:51:12,284  app.runtime.agent.agent  INFO  [agent.config] building session config: sandbox_active=False hitl_available=True hitl_enabled=False
+2026-03-01 18:51:12,288  app.runtime.agent.agent  INFO  [agent.config] hooks: hitl only
+2026-03-01 18:51:12,289  app.runtime.agent.agent  INFO  [agent.new_session] creating session: model=claude-sonnet-4.6, tools=8, mcp_servers=['playwright']
+2026-03-01 18:51:12,348  app.runtime.agent.agent  INFO  [agent.new_session] session created: CopilotSession
+2026-03-01 18:51:12,348  app.runtime.agent.agent  INFO  [agent.send] calling session.send() ...
+2026-03-01 18:51:12,354  app.runtime.agent.event_handler  INFO  [event_handler] event #1 type=SessionEventType.PENDING_MESSAGES_MODIFIED
+2026-03-01 18:51:12,354  app.runtime.agent.agent  INFO  [agent.send] session.send() returned, waiting for completion ...
+2026-03-01 18:51:16,185  app.runtime.agent.event_handler  INFO  [event_handler] event #2 type=SessionEventType.PENDING_MESSAGES_MODIFIED
+2026-03-01 18:51:16,775  app.runtime.agent.event_handler  INFO  [event_handler] event #3 type=SessionEventType.USER_MESSAGE
+2026-03-01 18:51:17,105  app.runtime.agent.event_handler  INFO  [event_handler] event #4 type=SessionEventType.ASSISTANT_TURN_START
+2026-03-01 18:51:17,105  app.runtime.agent.event_handler  INFO  [event_handler] event #5 type=SessionEventType.SESSION_USAGE_INFO
+2026-03-01 18:51:18,376  app.runtime.agent.event_handler  INFO  [event_handler] event #6 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,399  app.runtime.agent.event_handler  INFO  [event_handler] event #8 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,473  app.runtime.agent.event_handler  INFO  [event_handler] event #10 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,557  app.runtime.agent.event_handler  INFO  [event_handler] event #12 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,601  app.runtime.agent.event_handler  INFO  [event_handler] event #14 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,644  app.runtime.agent.event_handler  INFO  [event_handler] event #16 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,687  app.runtime.agent.event_handler  INFO  [event_handler] event #18 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,734  app.runtime.agent.event_handler  INFO  [event_handler] event #20 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,772  app.runtime.agent.event_handler  INFO  [event_handler] event #22 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,816  app.runtime.agent.event_handler  INFO  [event_handler] event #24 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,855  app.runtime.agent.event_handler  INFO  [event_handler] event #26 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,901  app.runtime.agent.event_handler  INFO  [event_handler] event #28 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,944  app.runtime.agent.event_handler  INFO  [event_handler] event #30 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:18,986  app.runtime.agent.event_handler  INFO  [event_handler] event #32 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:19,137  app.runtime.agent.event_handler  INFO  [event_handler] event #34 type=SessionEventType.ASSISTANT_USAGE
+2026-03-01 18:51:19,138  app.runtime.agent.event_handler  INFO  [event_handler] event #35 type=SessionEventType.ASSISTANT_MESSAGE
+2026-03-01 18:51:19,138  app.runtime.agent.event_handler  INFO  [event_handler] ASSISTANT_MESSAGE received, len=96
+2026-03-01 18:51:19,138  app.runtime.agent.event_handler  INFO  [event_handler] event #36 type=SessionEventType.ASSISTANT_TURN_END
+2026-03-01 18:51:19,139  app.runtime.agent.event_handler  INFO  [event_handler] event #37 type=SessionEventType.SESSION_IDLE
+2026-03-01 18:51:19,139  app.runtime.agent.event_handler  INFO  [event_handler] SESSION_IDLE -- marking done
+2026-03-01 18:51:19,139  app.runtime.agent.agent  INFO  [agent.send] response complete in 6.8s, text_len=96
+2026-03-01 18:51:19,139  app.runtime.server.chat  INFO  [chat.send_prompt] response complete, len=96, chunks=14
+2026-03-01 18:51:26,760  app.runtime.server.chat  INFO  [chat.dispatch] action=send keys=['action', 'message']
+2026-03-01 18:51:26,760  app.runtime.server.chat  INFO  [chat.send_prompt] text='list skills you have' session=(none)
+2026-03-01 18:51:26,761  app.runtime.server.chat  INFO  [chat.send_prompt] HITL emitter bound: model=claude-sonnet-4.6
+2026-03-01 18:51:26,761  app.runtime.server.chat  INFO  [chat.send_prompt] calling agent.send() ...
+2026-03-01 18:51:26,761  app.runtime.agent.agent  INFO  [agent.send] prompt='list skills you have' (len=20), has_session=True
+2026-03-01 18:51:26,761  app.runtime.agent.agent  INFO  [agent.send] calling session.send() ...
+2026-03-01 18:51:26,764  app.runtime.agent.event_handler  INFO  [event_handler] event #1 type=SessionEventType.PENDING_MESSAGES_MODIFIED
+2026-03-01 18:51:26,765  app.runtime.agent.event_handler  INFO  [event_handler] event #2 type=SessionEventType.PENDING_MESSAGES_MODIFIED
+2026-03-01 18:51:26,765  app.runtime.agent.agent  INFO  [agent.send] session.send() returned, waiting for completion ...
+2026-03-01 18:51:26,767  app.runtime.agent.event_handler  INFO  [event_handler] event #3 type=SessionEventType.USER_MESSAGE
+2026-03-01 18:51:26,892  app.runtime.agent.event_handler  INFO  [event_handler] event #4 type=SessionEventType.ASSISTANT_TURN_START
+2026-03-01 18:51:26,892  app.runtime.agent.event_handler  INFO  [event_handler] event #5 type=SessionEventType.SESSION_USAGE_INFO
+2026-03-01 18:51:28,309  app.runtime.agent.event_handler  INFO  [event_handler] event #6 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:28,602  app.runtime.agent.event_handler  INFO  [event_handler] event #7 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:28,602  app.runtime.agent.event_handler  INFO  [event_handler] event #8 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:28,603  app.runtime.agent.event_handler  INFO  [event_handler] event #9 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:28,603  app.runtime.agent.event_handler  INFO  [event_handler] event #10 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:28,605  app.runtime.agent.event_handler  INFO  [event_handler] event #11 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:28,605  app.runtime.agent.event_handler  INFO  [event_handler] event #12 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,396  app.runtime.agent.event_handler  INFO  [event_handler] event #13 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,399  app.runtime.agent.event_handler  INFO  [event_handler] event #14 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,399  app.runtime.agent.event_handler  INFO  [event_handler] event #15 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,402  app.runtime.agent.event_handler  INFO  [event_handler] event #16 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,405  app.runtime.agent.event_handler  INFO  [event_handler] event #17 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,406  app.runtime.agent.event_handler  INFO  [event_handler] event #18 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,408  app.runtime.agent.event_handler  INFO  [event_handler] event #19 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,412  app.runtime.agent.event_handler  INFO  [event_handler] event #20 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,412  app.runtime.agent.event_handler  INFO  [event_handler] event #21 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,413  app.runtime.agent.event_handler  INFO  [event_handler] event #22 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,415  app.runtime.agent.event_handler  INFO  [event_handler] event #23 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,415  app.runtime.agent.event_handler  INFO  [event_handler] event #24 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,418  app.runtime.agent.event_handler  INFO  [event_handler] event #25 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,419  app.runtime.agent.event_handler  INFO  [event_handler] event #26 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,420  app.runtime.agent.event_handler  INFO  [event_handler] event #27 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,421  app.runtime.agent.event_handler  INFO  [event_handler] event #28 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,423  app.runtime.agent.event_handler  INFO  [event_handler] event #29 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,426  app.runtime.agent.event_handler  INFO  [event_handler] event #30 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,463  app.runtime.agent.event_handler  INFO  [event_handler] event #31 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,464  app.runtime.agent.event_handler  INFO  [event_handler] event #32 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,464  app.runtime.agent.event_handler  INFO  [event_handler] event #33 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,472  app.runtime.agent.event_handler  INFO  [event_handler] event #34 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,474  app.runtime.agent.event_handler  INFO  [event_handler] event #35 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,474  app.runtime.agent.event_handler  INFO  [event_handler] event #36 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,475  app.runtime.agent.event_handler  INFO  [event_handler] event #37 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:29,494  app.runtime.agent.event_handler  INFO  [event_handler] event #38 type=SessionEventType.ASSISTANT_USAGE
+2026-03-01 18:51:29,494  app.runtime.agent.event_handler  INFO  [event_handler] event #39 type=SessionEventType.ASSISTANT_MESSAGE
+2026-03-01 18:51:29,494  app.runtime.agent.event_handler  INFO  [event_handler] ASSISTANT_MESSAGE received, len=0
+2026-03-01 18:51:29,494  app.runtime.agent.event_handler  INFO  [event_handler] event #40 type=SessionEventType.TOOL_EXECUTION_START
+2026-03-01 18:51:29,495  app.runtime.agent.event_handler  INFO  [event_handler] event #41 type=SessionEventType.TOOL_EXECUTION_START
+2026-03-01 18:51:29,496  app.runtime.agent.hitl  INFO  [hitl.hook] ALLOW (always-approved) tool=report_intent
+2026-03-01 18:51:29,496  app.runtime.agent.hitl  INFO  [hitl.hook] ENTER on_pre_tool_use: tool=bash call_id=8922474e ctx=interactive model=claude-sonnet-4.6 mcp=(none) hitl_enabled=False
+2026-03-01 18:51:29,496  app.runtime.agent.hitl  INFO  [hitl.hook] resolved strategy=allow for tool=bash
+2026-03-01 18:51:29,496  app.runtime.agent.hitl  INFO  [hitl.hook] ALLOW tool=bash call_id=8922474e
+2026-03-01 18:51:29,498  app.runtime.agent.event_handler  INFO  [event_handler] event #42 type=SessionEventType.TOOL_EXECUTION_COMPLETE
+2026-03-01 18:51:30,059  app.runtime.agent.event_handler  INFO  [event_handler] event #43 type=SessionEventType.TOOL_EXECUTION_COMPLETE
+2026-03-01 18:51:30,059  app.runtime.agent.event_handler  INFO  [event_handler] event #44 type=SessionEventType.ASSISTANT_TURN_END
+2026-03-01 18:51:30,060  app.runtime.agent.event_handler  INFO  [event_handler] event #45 type=SessionEventType.ASSISTANT_TURN_START
+2026-03-01 18:51:30,060  app.runtime.agent.event_handler  INFO  [event_handler] event #46 type=SessionEventType.SESSION_USAGE_INFO
+2026-03-01 18:51:31,359  app.runtime.agent.event_handler  INFO  [event_handler] event #47 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,492  app.runtime.agent.event_handler  INFO  [event_handler] event #48 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,492  app.runtime.agent.event_handler  INFO  [event_handler] event #49 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,492  app.runtime.agent.event_handler  INFO  [event_handler] event #50 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,492  app.runtime.agent.event_handler  INFO  [event_handler] event #51 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,492  app.runtime.agent.event_handler  INFO  [event_handler] event #52 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,492  app.runtime.agent.event_handler  INFO  [event_handler] event #53 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,493  app.runtime.agent.event_handler  INFO  [event_handler] event #54 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,493  app.runtime.agent.event_handler  INFO  [event_handler] event #55 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,493  app.runtime.agent.event_handler  INFO  [event_handler] event #56 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,493  app.runtime.agent.event_handler  INFO  [event_handler] event #57 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,493  app.runtime.agent.event_handler  INFO  [event_handler] event #58 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,493  app.runtime.agent.event_handler  INFO  [event_handler] event #59 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,493  app.runtime.agent.event_handler  INFO  [event_handler] event #60 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,494  app.runtime.agent.event_handler  INFO  [event_handler] event #61 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,496  app.runtime.agent.event_handler  INFO  [event_handler] event #62 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,496  app.runtime.agent.event_handler  INFO  [event_handler] event #63 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,496  app.runtime.agent.event_handler  INFO  [event_handler] event #64 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,499  app.runtime.agent.event_handler  INFO  [event_handler] event #65 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,499  app.runtime.agent.event_handler  INFO  [event_handler] event #66 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,500  app.runtime.agent.event_handler  INFO  [event_handler] event #67 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,500  app.runtime.agent.event_handler  INFO  [event_handler] event #68 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,500  app.runtime.agent.event_handler  INFO  [event_handler] event #69 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,500  app.runtime.agent.event_handler  INFO  [event_handler] event #70 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,500  app.runtime.agent.event_handler  INFO  [event_handler] event #71 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,500  app.runtime.agent.event_handler  INFO  [event_handler] event #72 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,500  app.runtime.agent.event_handler  INFO  [event_handler] event #73 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,502  app.runtime.agent.event_handler  INFO  [event_handler] event #74 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,503  app.runtime.agent.event_handler  INFO  [event_handler] event #75 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,503  app.runtime.agent.event_handler  INFO  [event_handler] event #76 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,503  app.runtime.agent.event_handler  INFO  [event_handler] event #77 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,504  app.runtime.agent.event_handler  INFO  [event_handler] event #78 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,504  app.runtime.agent.event_handler  INFO  [event_handler] event #79 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,504  app.runtime.agent.event_handler  INFO  [event_handler] event #80 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,504  app.runtime.agent.event_handler  INFO  [event_handler] event #81 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,504  app.runtime.agent.event_handler  INFO  [event_handler] event #82 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,504  app.runtime.agent.event_handler  INFO  [event_handler] event #83 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,504  app.runtime.agent.event_handler  INFO  [event_handler] event #84 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,536  app.runtime.agent.event_handler  INFO  [event_handler] event #85 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,841  app.runtime.agent.event_handler  INFO  [event_handler] event #86 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,842  app.runtime.agent.event_handler  INFO  [event_handler] event #87 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,842  app.runtime.agent.event_handler  INFO  [event_handler] event #88 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,842  app.runtime.agent.event_handler  INFO  [event_handler] event #89 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,842  app.runtime.agent.event_handler  INFO  [event_handler] event #90 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,842  app.runtime.agent.event_handler  INFO  [event_handler] event #91 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,843  app.runtime.agent.event_handler  INFO  [event_handler] event #92 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,844  app.runtime.agent.event_handler  INFO  [event_handler] event #93 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,844  app.runtime.agent.event_handler  INFO  [event_handler] event #94 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,847  app.runtime.agent.event_handler  INFO  [event_handler] event #95 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:32,857  app.runtime.agent.event_handler  INFO  [event_handler] event #96 type=SessionEventType.ASSISTANT_USAGE
+2026-03-01 18:51:32,858  app.runtime.agent.event_handler  INFO  [event_handler] event #97 type=SessionEventType.ASSISTANT_MESSAGE
+2026-03-01 18:51:32,858  app.runtime.agent.event_handler  INFO  [event_handler] ASSISTANT_MESSAGE received, len=0
+2026-03-01 18:51:32,858  app.runtime.agent.event_handler  INFO  [event_handler] event #98 type=SessionEventType.TOOL_EXECUTION_START
+2026-03-01 18:51:32,858  app.runtime.agent.hitl  INFO  [hitl.hook] ENTER on_pre_tool_use: tool=bash call_id=33a30883 ctx=interactive model=claude-sonnet-4.6 mcp=(none) hitl_enabled=False
+2026-03-01 18:51:32,858  app.runtime.agent.hitl  INFO  [hitl.hook] resolved strategy=allow for tool=bash
+2026-03-01 18:51:32,858  app.runtime.agent.hitl  INFO  [hitl.hook] ALLOW tool=bash call_id=33a30883
+2026-03-01 18:51:33,518  app.runtime.agent.event_handler  INFO  [event_handler] event #99 type=SessionEventType.TOOL_EXECUTION_COMPLETE
+2026-03-01 18:51:33,519  app.runtime.agent.event_handler  INFO  [event_handler] event #100 type=SessionEventType.ASSISTANT_TURN_END
+2026-03-01 18:51:33,519  app.runtime.agent.event_handler  INFO  [event_handler] event #101 type=SessionEventType.ASSISTANT_TURN_START
+2026-03-01 18:51:33,519  app.runtime.agent.event_handler  INFO  [event_handler] event #102 type=SessionEventType.SESSION_USAGE_INFO
+2026-03-01 18:51:34,915  app.runtime.agent.event_handler  INFO  [event_handler] event #103 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:34,915  app.runtime.agent.event_handler  INFO  [event_handler] event #105 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:34,916  app.runtime.agent.event_handler  INFO  [event_handler] event #107 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:34,916  app.runtime.agent.event_handler  INFO  [event_handler] event #109 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:34,952  app.runtime.agent.event_handler  INFO  [event_handler] event #111 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,039  app.runtime.agent.event_handler  INFO  [event_handler] event #113 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,082  app.runtime.agent.event_handler  INFO  [event_handler] event #115 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,220  app.runtime.agent.event_handler  INFO  [event_handler] event #117 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,272  app.runtime.agent.event_handler  INFO  [event_handler] event #119 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,359  app.runtime.agent.event_handler  INFO  [event_handler] event #121 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,412  app.runtime.agent.event_handler  INFO  [event_handler] event #123 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,444  app.runtime.agent.event_handler  INFO  [event_handler] event #125 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,489  app.runtime.agent.event_handler  INFO  [event_handler] event #127 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,532  app.runtime.agent.event_handler  INFO  [event_handler] event #129 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,575  app.runtime.agent.event_handler  INFO  [event_handler] event #131 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,632  app.runtime.agent.event_handler  INFO  [event_handler] event #133 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,662  app.runtime.agent.event_handler  INFO  [event_handler] event #135 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,703  app.runtime.agent.event_handler  INFO  [event_handler] event #137 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,748  app.runtime.agent.event_handler  INFO  [event_handler] event #139 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,792  app.runtime.agent.event_handler  INFO  [event_handler] event #141 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,853  app.runtime.agent.event_handler  INFO  [event_handler] event #143 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,879  app.runtime.agent.event_handler  INFO  [event_handler] event #145 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,925  app.runtime.agent.event_handler  INFO  [event_handler] event #147 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:35,966  app.runtime.agent.event_handler  INFO  [event_handler] event #149 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,008  app.runtime.agent.event_handler  INFO  [event_handler] event #151 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,073  app.runtime.agent.event_handler  INFO  [event_handler] event #153 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,094  app.runtime.agent.event_handler  INFO  [event_handler] event #155 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,137  app.runtime.agent.event_handler  INFO  [event_handler] event #157 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,179  app.runtime.agent.event_handler  INFO  [event_handler] event #159 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,227  app.runtime.agent.event_handler  INFO  [event_handler] event #161 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,295  app.runtime.agent.event_handler  INFO  [event_handler] event #163 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,310  app.runtime.agent.event_handler  INFO  [event_handler] event #165 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,353  app.runtime.agent.event_handler  INFO  [event_handler] event #167 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,396  app.runtime.agent.event_handler  INFO  [event_handler] event #169 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,447  app.runtime.agent.event_handler  INFO  [event_handler] event #171 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,484  app.runtime.agent.event_handler  INFO  [event_handler] event #173 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,527  app.runtime.agent.event_handler  INFO  [event_handler] event #175 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,570  app.runtime.agent.event_handler  INFO  [event_handler] event #177 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,613  app.runtime.agent.event_handler  INFO  [event_handler] event #179 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,657  app.runtime.agent.event_handler  INFO  [event_handler] event #181 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,701  app.runtime.agent.event_handler  INFO  [event_handler] event #183 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,754  app.runtime.agent.event_handler  INFO  [event_handler] event #185 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,788  app.runtime.agent.event_handler  INFO  [event_handler] event #187 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,832  app.runtime.agent.event_handler  INFO  [event_handler] event #189 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,875  app.runtime.agent.event_handler  INFO  [event_handler] event #191 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,918  app.runtime.agent.event_handler  INFO  [event_handler] event #193 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:36,960  app.runtime.agent.event_handler  INFO  [event_handler] event #195 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:37,004  app.runtime.agent.event_handler  INFO  [event_handler] event #197 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:37,047  app.runtime.agent.event_handler  INFO  [event_handler] event #199 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:37,091  app.runtime.agent.event_handler  INFO  [event_handler] event #201 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:37,134  app.runtime.agent.event_handler  INFO  [event_handler] event #203 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:37,178  app.runtime.agent.event_handler  INFO  [event_handler] event #205 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:37,221  app.runtime.agent.event_handler  INFO  [event_handler] event #207 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:37,266  app.runtime.agent.event_handler  INFO  [event_handler] event #209 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:37,311  app.runtime.agent.event_handler  INFO  [event_handler] event #211 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:37,352  app.runtime.agent.event_handler  INFO  [event_handler] event #213 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:37,425  app.runtime.agent.event_handler  INFO  [event_handler] event #215 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:37,437  app.runtime.agent.event_handler  INFO  [event_handler] event #217 type=SessionEventType.ASSISTANT_USAGE
+2026-03-01 18:51:37,437  app.runtime.agent.event_handler  INFO  [event_handler] event #218 type=SessionEventType.ASSISTANT_MESSAGE
+2026-03-01 18:51:37,437  app.runtime.agent.event_handler  INFO  [event_handler] ASSISTANT_MESSAGE received, len=580
+2026-03-01 18:51:37,437  app.runtime.agent.event_handler  INFO  [event_handler] event #219 type=SessionEventType.ASSISTANT_TURN_END
+2026-03-01 18:51:37,438  app.runtime.agent.event_handler  INFO  [event_handler] event #220 type=SessionEventType.SESSION_IDLE
+2026-03-01 18:51:37,438  app.runtime.agent.event_handler  INFO  [event_handler] SESSION_IDLE -- marking done
+2026-03-01 18:51:37,438  app.runtime.agent.agent  INFO  [agent.send] response complete in 10.7s, text_len=580
+2026-03-01 18:51:37,438  app.runtime.server.chat  INFO  [chat.send_prompt] response complete, len=580, chunks=57
+2026-03-01 18:51:44,535  app.runtime.server.chat  INFO  [chat.dispatch] action=send keys=['action', 'message']
+2026-03-01 18:51:44,535  app.runtime.server.chat  INFO  [chat.send_prompt] text='daily-briefing -' session=(none)
+2026-03-01 18:51:44,536  app.runtime.server.chat  INFO  [chat.send_prompt] HITL emitter bound: model=claude-sonnet-4.6
+2026-03-01 18:51:44,536  app.runtime.server.chat  INFO  [chat.send_prompt] calling agent.send() ...
+2026-03-01 18:51:44,536  app.runtime.agent.agent  INFO  [agent.send] prompt='daily-briefing -' (len=16), has_session=True
+2026-03-01 18:51:44,536  app.runtime.agent.agent  INFO  [agent.send] calling session.send() ...
+2026-03-01 18:51:44,537  app.runtime.agent.event_handler  INFO  [event_handler] event #1 type=SessionEventType.PENDING_MESSAGES_MODIFIED
+2026-03-01 18:51:44,537  app.runtime.agent.event_handler  INFO  [event_handler] event #2 type=SessionEventType.PENDING_MESSAGES_MODIFIED
+2026-03-01 18:51:44,537  app.runtime.agent.agent  INFO  [agent.send] session.send() returned, waiting for completion ...
+2026-03-01 18:51:44,540  app.runtime.agent.event_handler  INFO  [event_handler] event #3 type=SessionEventType.USER_MESSAGE
+2026-03-01 18:51:44,661  app.runtime.agent.event_handler  INFO  [event_handler] event #4 type=SessionEventType.ASSISTANT_TURN_START
+2026-03-01 18:51:44,661  app.runtime.agent.event_handler  INFO  [event_handler] event #5 type=SessionEventType.SESSION_USAGE_INFO
+2026-03-01 18:51:46,114  app.runtime.agent.event_handler  INFO  [event_handler] event #6 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:46,275  app.runtime.agent.event_handler  INFO  [event_handler] event #7 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:46,277  app.runtime.agent.event_handler  INFO  [event_handler] event #8 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:46,277  app.runtime.agent.event_handler  INFO  [event_handler] event #9 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:46,280  app.runtime.agent.event_handler  INFO  [event_handler] event #10 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:46,297  app.runtime.agent.event_handler  INFO  [event_handler] event #11 type=SessionEventType.ASSISTANT_USAGE
+2026-03-01 18:51:46,297  app.runtime.agent.event_handler  INFO  [event_handler] event #12 type=SessionEventType.ASSISTANT_MESSAGE
+2026-03-01 18:51:46,297  app.runtime.agent.event_handler  INFO  [event_handler] ASSISTANT_MESSAGE received, len=0
+2026-03-01 18:51:46,297  app.runtime.agent.event_handler  INFO  [event_handler] event #13 type=SessionEventType.TOOL_EXECUTION_START
+2026-03-01 18:51:46,301  app.runtime.agent.hitl  INFO  [hitl.hook] ENTER on_pre_tool_use: tool=skill call_id=210988e6 ctx=interactive model=claude-sonnet-4.6 mcp=(none) hitl_enabled=False
+2026-03-01 18:51:46,301  app.runtime.agent.hitl  INFO  [hitl.hook] resolved strategy=allow for tool=skill
+2026-03-01 18:51:46,301  app.runtime.agent.hitl  INFO  [hitl.hook] ALLOW tool=skill call_id=210988e6
+2026-03-01 18:51:46,361  app.runtime.agent.event_handler  INFO  [event_handler] event #14 type=SessionEventType.TOOL_EXECUTION_COMPLETE
+2026-03-01 18:51:46,362  app.runtime.agent.event_handler  INFO  [event_handler] event #15 type=SessionEventType.SKILL_INVOKED
+2026-03-01 18:51:46,362  app.runtime.agent.event_handler  INFO  [event_handler] event #16 type=SessionEventType.ASSISTANT_TURN_END
+2026-03-01 18:51:46,362  app.runtime.agent.event_handler  INFO  [event_handler] event #17 type=SessionEventType.ASSISTANT_TURN_START
+2026-03-01 18:51:46,362  app.runtime.agent.event_handler  INFO  [event_handler] event #18 type=SessionEventType.SESSION_USAGE_INFO
+2026-03-01 18:51:47,725  app.runtime.agent.event_handler  INFO  [event_handler] event #19 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:47,979  app.runtime.agent.event_handler  INFO  [event_handler] event #20 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:47,979  app.runtime.agent.event_handler  INFO  [event_handler] event #21 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:47,979  app.runtime.agent.event_handler  INFO  [event_handler] event #22 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:47,980  app.runtime.agent.event_handler  INFO  [event_handler] event #23 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:47,980  app.runtime.agent.event_handler  INFO  [event_handler] event #24 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:47,980  app.runtime.agent.event_handler  INFO  [event_handler] event #25 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,360  app.runtime.agent.event_handler  INFO  [event_handler] event #26 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,360  app.runtime.agent.event_handler  INFO  [event_handler] event #27 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,364  app.runtime.agent.event_handler  INFO  [event_handler] event #28 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,364  app.runtime.agent.event_handler  INFO  [event_handler] event #29 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,364  app.runtime.agent.event_handler  INFO  [event_handler] event #30 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,364  app.runtime.agent.event_handler  INFO  [event_handler] event #31 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,365  app.runtime.agent.event_handler  INFO  [event_handler] event #32 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,365  app.runtime.agent.event_handler  INFO  [event_handler] event #33 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,365  app.runtime.agent.event_handler  INFO  [event_handler] event #34 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,366  app.runtime.agent.event_handler  INFO  [event_handler] event #35 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,366  app.runtime.agent.event_handler  INFO  [event_handler] event #36 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,367  app.runtime.agent.event_handler  INFO  [event_handler] event #37 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,367  app.runtime.agent.event_handler  INFO  [event_handler] event #38 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,368  app.runtime.agent.event_handler  INFO  [event_handler] event #39 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,369  app.runtime.agent.event_handler  INFO  [event_handler] event #40 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,369  app.runtime.agent.event_handler  INFO  [event_handler] event #41 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,371  app.runtime.agent.event_handler  INFO  [event_handler] event #42 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,371  app.runtime.agent.event_handler  INFO  [event_handler] event #43 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,371  app.runtime.agent.event_handler  INFO  [event_handler] event #44 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,374  app.runtime.agent.event_handler  INFO  [event_handler] event #45 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,374  app.runtime.agent.event_handler  INFO  [event_handler] event #46 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,374  app.runtime.agent.event_handler  INFO  [event_handler] event #47 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,374  app.runtime.agent.event_handler  INFO  [event_handler] event #48 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,374  app.runtime.agent.event_handler  INFO  [event_handler] event #49 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,374  app.runtime.agent.event_handler  INFO  [event_handler] event #50 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,375  app.runtime.agent.event_handler  INFO  [event_handler] event #51 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,377  app.runtime.agent.event_handler  INFO  [event_handler] event #52 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,377  app.runtime.agent.event_handler  INFO  [event_handler] event #53 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,377  app.runtime.agent.event_handler  INFO  [event_handler] event #54 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,378  app.runtime.agent.event_handler  INFO  [event_handler] event #55 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,378  app.runtime.agent.event_handler  INFO  [event_handler] event #56 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,378  app.runtime.agent.event_handler  INFO  [event_handler] event #57 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,378  app.runtime.agent.event_handler  INFO  [event_handler] event #58 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,378  app.runtime.agent.event_handler  INFO  [event_handler] event #59 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,378  app.runtime.agent.event_handler  INFO  [event_handler] event #60 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,379  app.runtime.agent.event_handler  INFO  [event_handler] event #61 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,379  app.runtime.agent.event_handler  INFO  [event_handler] event #62 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,379  app.runtime.agent.event_handler  INFO  [event_handler] event #63 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,380  app.runtime.agent.event_handler  INFO  [event_handler] event #64 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,380  app.runtime.agent.event_handler  INFO  [event_handler] event #65 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,380  app.runtime.agent.event_handler  INFO  [event_handler] event #66 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,382  app.runtime.agent.event_handler  INFO  [event_handler] event #67 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,382  app.runtime.agent.event_handler  INFO  [event_handler] event #68 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,382  app.runtime.agent.event_handler  INFO  [event_handler] event #69 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,384  app.runtime.agent.event_handler  INFO  [event_handler] event #70 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,384  app.runtime.agent.event_handler  INFO  [event_handler] event #71 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,384  app.runtime.agent.event_handler  INFO  [event_handler] event #72 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,387  app.runtime.agent.event_handler  INFO  [event_handler] event #73 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,387  app.runtime.agent.event_handler  INFO  [event_handler] event #74 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,387  app.runtime.agent.event_handler  INFO  [event_handler] event #75 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,387  app.runtime.agent.event_handler  INFO  [event_handler] event #76 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,387  app.runtime.agent.event_handler  INFO  [event_handler] event #77 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,389  app.runtime.agent.event_handler  INFO  [event_handler] event #78 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,389  app.runtime.agent.event_handler  INFO  [event_handler] event #79 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,389  app.runtime.agent.event_handler  INFO  [event_handler] event #80 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,390  app.runtime.agent.event_handler  INFO  [event_handler] event #81 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,393  app.runtime.agent.event_handler  INFO  [event_handler] event #82 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,394  app.runtime.agent.event_handler  INFO  [event_handler] event #83 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,394  app.runtime.agent.event_handler  INFO  [event_handler] event #84 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,394  app.runtime.agent.event_handler  INFO  [event_handler] event #85 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,394  app.runtime.agent.event_handler  INFO  [event_handler] event #86 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,394  app.runtime.agent.event_handler  INFO  [event_handler] event #87 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,394  app.runtime.agent.event_handler  INFO  [event_handler] event #88 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,745  app.runtime.agent.event_handler  INFO  [event_handler] event #89 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,746  app.runtime.agent.event_handler  INFO  [event_handler] event #90 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,749  app.runtime.agent.event_handler  INFO  [event_handler] event #91 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,753  app.runtime.agent.event_handler  INFO  [event_handler] event #92 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,754  app.runtime.agent.event_handler  INFO  [event_handler] event #93 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,756  app.runtime.agent.event_handler  INFO  [event_handler] event #94 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,756  app.runtime.agent.event_handler  INFO  [event_handler] event #95 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,763  app.runtime.agent.event_handler  INFO  [event_handler] event #96 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,763  app.runtime.agent.event_handler  INFO  [event_handler] event #97 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:49,775  app.runtime.agent.event_handler  INFO  [event_handler] event #98 type=SessionEventType.ASSISTANT_USAGE
+2026-03-01 18:51:49,775  app.runtime.agent.event_handler  INFO  [event_handler] event #99 type=SessionEventType.ASSISTANT_MESSAGE
+2026-03-01 18:51:49,775  app.runtime.agent.event_handler  INFO  [event_handler] ASSISTANT_MESSAGE received, len=0
+2026-03-01 18:51:49,775  app.runtime.agent.event_handler  INFO  [event_handler] event #100 type=SessionEventType.TOOL_EXECUTION_START
+2026-03-01 18:51:49,776  app.runtime.agent.event_handler  INFO  [event_handler] event #101 type=SessionEventType.TOOL_EXECUTION_START
+2026-03-01 18:51:49,777  app.runtime.agent.hitl  INFO  [hitl.hook] ALLOW (always-approved) tool=report_intent
+2026-03-01 18:51:49,777  app.runtime.agent.hitl  INFO  [hitl.hook] ENTER on_pre_tool_use: tool=bash call_id=a0a0a423 ctx=interactive model=claude-sonnet-4.6 mcp=(none) hitl_enabled=False
+2026-03-01 18:51:49,777  app.runtime.agent.hitl  INFO  [hitl.hook] resolved strategy=allow for tool=bash
+2026-03-01 18:51:49,777  app.runtime.agent.hitl  INFO  [hitl.hook] ALLOW tool=bash call_id=a0a0a423
+2026-03-01 18:51:49,778  app.runtime.agent.event_handler  INFO  [event_handler] event #102 type=SessionEventType.TOOL_EXECUTION_COMPLETE
+2026-03-01 18:51:50,550  app.runtime.agent.event_handler  INFO  [event_handler] event #103 type=SessionEventType.TOOL_EXECUTION_COMPLETE
+2026-03-01 18:51:50,551  app.runtime.agent.event_handler  INFO  [event_handler] event #104 type=SessionEventType.ASSISTANT_TURN_END
+2026-03-01 18:51:50,551  app.runtime.agent.event_handler  INFO  [event_handler] event #105 type=SessionEventType.ASSISTANT_TURN_START
+2026-03-01 18:51:50,551  app.runtime.agent.event_handler  INFO  [event_handler] event #106 type=SessionEventType.SESSION_USAGE_INFO
+2026-03-01 18:51:50,701  aiohttp.access  INFO  127.0.0.1 GET /api/sessions 200 0.005s
+2026-03-01 18:51:52,462  app.runtime.agent.event_handler  INFO  [event_handler] event #107 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,836  app.runtime.agent.event_handler  INFO  [event_handler] event #108 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,836  app.runtime.agent.event_handler  INFO  [event_handler] event #109 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,837  app.runtime.agent.event_handler  INFO  [event_handler] event #110 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,837  app.runtime.agent.event_handler  INFO  [event_handler] event #111 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,837  app.runtime.agent.event_handler  INFO  [event_handler] event #112 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,838  app.runtime.agent.event_handler  INFO  [event_handler] event #113 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,839  app.runtime.agent.event_handler  INFO  [event_handler] event #114 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,839  app.runtime.agent.event_handler  INFO  [event_handler] event #115 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,839  app.runtime.agent.event_handler  INFO  [event_handler] event #116 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,839  app.runtime.agent.event_handler  INFO  [event_handler] event #117 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,840  app.runtime.agent.event_handler  INFO  [event_handler] event #118 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,840  app.runtime.agent.event_handler  INFO  [event_handler] event #119 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,840  app.runtime.agent.event_handler  INFO  [event_handler] event #120 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,842  app.runtime.agent.event_handler  INFO  [event_handler] event #121 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,842  app.runtime.agent.event_handler  INFO  [event_handler] event #122 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,842  app.runtime.agent.event_handler  INFO  [event_handler] event #123 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,842  app.runtime.agent.event_handler  INFO  [event_handler] event #124 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,842  app.runtime.agent.event_handler  INFO  [event_handler] event #125 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,842  app.runtime.agent.event_handler  INFO  [event_handler] event #126 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,843  app.runtime.agent.event_handler  INFO  [event_handler] event #127 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,843  app.runtime.agent.event_handler  INFO  [event_handler] event #128 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,843  app.runtime.agent.event_handler  INFO  [event_handler] event #129 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:52,843  app.runtime.agent.event_handler  INFO  [event_handler] event #130 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:53,129  app.runtime.agent.event_handler  INFO  [event_handler] event #131 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:53,130  app.runtime.agent.event_handler  INFO  [event_handler] event #132 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:53,131  app.runtime.agent.event_handler  INFO  [event_handler] event #133 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:53,131  app.runtime.agent.event_handler  INFO  [event_handler] event #134 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:53,131  app.runtime.agent.event_handler  INFO  [event_handler] event #135 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:51:53,153  app.runtime.agent.event_handler  INFO  [event_handler] event #136 type=SessionEventType.ASSISTANT_USAGE
+2026-03-01 18:51:53,153  app.runtime.agent.event_handler  INFO  [event_handler] event #137 type=SessionEventType.ASSISTANT_MESSAGE
+2026-03-01 18:51:53,153  app.runtime.agent.event_handler  INFO  [event_handler] ASSISTANT_MESSAGE received, len=0
+2026-03-01 18:51:53,153  app.runtime.agent.event_handler  INFO  [event_handler] event #138 type=SessionEventType.TOOL_EXECUTION_START
+2026-03-01 18:51:53,154  app.runtime.agent.hitl  INFO  [hitl.hook] ENTER on_pre_tool_use: tool=bash call_id=10d5b913 ctx=interactive model=claude-sonnet-4.6 mcp=(none) hitl_enabled=False
+2026-03-01 18:51:53,154  app.runtime.agent.hitl  INFO  [hitl.hook] resolved strategy=allow for tool=bash
+2026-03-01 18:51:53,154  app.runtime.agent.hitl  INFO  [hitl.hook] ALLOW tool=bash call_id=10d5b913
+2026-03-01 18:51:53,709  app.runtime.agent.event_handler  INFO  [event_handler] event #139 type=SessionEventType.TOOL_EXECUTION_COMPLETE
+2026-03-01 18:51:53,709  app.runtime.agent.event_handler  INFO  [event_handler] event #140 type=SessionEventType.ASSISTANT_TURN_END
+2026-03-01 18:51:53,710  app.runtime.agent.event_handler  INFO  [event_handler] event #141 type=SessionEventType.ASSISTANT_TURN_START
+2026-03-01 18:51:53,710  app.runtime.agent.event_handler  INFO  [event_handler] event #142 type=SessionEventType.SESSION_USAGE_INFO
+2026-03-01 18:51:55,271  app.runtime.agent.event_handler  INFO  [event_handler] event #143 type=SessionEventType.ASSISTANT_STREAMING_DELTA
+2026-03-01 18:52:01,346  aiohttp.access  INFO  127.0.0.1 GET /assets/InfrastructureSettings-BdAV-Q6R.js 200 0.004s
+2026-03-01 18:52:01,347  aiohttp.access  INFO  127.0.0.1 GET /assets/Environments-Bn2MrKh5.js 200 0.003s
+2026-03-01 18:52:01,347  aiohttp.access  INFO  127.0.0.1 GET /assets/Workspace-ewmJVIup.js 200 0.003s
+2026-03-01 18:52:01,347  aiohttp.access  INFO  127.0.0.1 GET /assets/FoundryIQ-BC_Qy6Zp.js 200 0.002s
+2026-03-01 18:52:01,370  app.runtime.server.chat  INFO  [chat.handle] WebSocket disconnected
+2026-03-01 18:52:01,370  aiohttp.access  INFO  127.0.0.1 GET /api/chat/ws 101 52.541s
+2026-03-01 18:52:01,370  app.runtime.agent.agent  INFO  [agent.send] cancelled -- aborting and destroying session to prevent stale state
+2026-03-01 18:52:01,372  app.runtime.agent.agent  INFO  [agent] session aborted
+2026-03-01 18:52:01,373  app.runtime.agent.event_handler  INFO  [event_handler] event #144 type=SessionEventType.ABORT
+2026-03-01 18:52:01,373  app.runtime.agent.event_handler  INFO  [event_handler] event #145 type=SessionEventType.SESSION_INFO
+2026-03-01 18:52:04,375  app.runtime.server.chat  INFO  [chat.handle] WebSocket connected from 127.0.0.1
+2026-03-01 18:52:04,991  aiohttp.access  INFO  127.0.0.1 GET /api/foundry-iq/config 200 0.000s
+2026-03-01 18:52:05,576  aiohttp.access  INFO  127.0.0.1 GET /api/environments 200 0.000s
+2026-03-01 18:52:06,400  aiohttp.access  INFO  127.0.0.1 GET /api/setup/voice/config 200 0.000s
+2026-03-01 18:52:06,867  aiohttp.access  INFO  127.0.0.1 GET /api/workspace/list 200 0.001s
+2026-03-01 18:52:07,458  aiohttp.access  INFO  127.0.0.1 GET /api/setup/voice/config 200 0.000s
+2026-03-01 18:52:09,363  aiohttp.access  INFO  127.0.0.1 GET /api/workspace/list 200 0.001s
+2026-03-01 18:52:09,806  aiohttp.access  INFO  127.0.0.1 GET /api/monitoring/config 200 0.000s
+2026-03-01 18:52:10,514  aiohttp.access  INFO  127.0.0.1 GET /api/workspace/list 200 0.001s
+2026-03-01 18:52:10,817  aiohttp.access  INFO  127.0.0.1 GET /api/setup/voice/config 200 0.000s
+2026-03-01 18:52:14,169  aiohttp.access  INFO  127.0.0.1 GET /api/workspace/list 200 0.001s
+2026-03-01 18:52:14,522  aiohttp.access  INFO  127.0.0.1 GET /api/monitoring/config 200 0.000s
+2026-03-01 18:52:14,972  aiohttp.access  INFO  127.0.0.1 GET /api/workspace/list 200 0.000s
+2026-03-01 18:52:15,273  aiohttp.access  INFO  127.0.0.1 GET /api/setup/voice/config 200 0.000s
+2026-03-01 18:52:23,627  aiohttp.access  INFO  127.0.0.1 GET /api/workspace/list 200 0.000s
+2026-03-01 18:52:24,947  aiohttp.access  INFO  127.0.0.1 GET /api/monitoring/config 200 0.000s
+2026-03-01 18:52:25,316  aiohttp.access  INFO  127.0.0.1 GET /api/workspace/list 200 0.000s
+2026-03-01 18:52:25,959  aiohttp.access  INFO  127.0.0.1 GET /api/monitoring/config 200 0.000s
+2026-03-01 18:52:31,734  aiohttp.access  INFO  127.0.0.1 GET /api/workspace/list 200 0.000s
+2026-03-01 18:52:32,027  aiohttp.access  INFO  127.0.0.1 GET /api/setup/voice/config 200 0.000s
+2026-03-01 18:52:32,356  aiohttp.access  INFO  127.0.0.1 GET /api/environments 200 0.000s
+2026-03-01 18:52:33,108  aiohttp.access  INFO  127.0.0.1 GET /api/foundry-iq/config 200 0.000s
+2026-03-01 18:52:56,138  aiohttp.server  ERROR  Error handling request from 127.0.0.1
+Traceback (most recent call last):
+  File "/Users/ghu/aiworker/polyclaw/.venv/lib/python3.14/site-packages/aiohttp/web_protocol.py", line 510, in _handle_request
+    resp = await request_handler(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ghu/aiworker/polyclaw/.venv/lib/python3.14/site-packages/aiohttp/web_app.py", line 569, in _handle
+    return await handler(request)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ghu/aiworker/polyclaw/.venv/lib/python3.14/site-packages/aiohttp/web_middlewares.py", line 117, in impl
+    return await handler(request)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ghu/aiworker/polyclaw/app/runtime/server/middleware.py", line 60, in lockdown_middleware
+    return await handler(request)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ghu/aiworker/polyclaw/app/runtime/server/middleware.py", line 79, in tunnel_restriction_middleware
+    return await handler(request)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ghu/aiworker/polyclaw/app/runtime/server/middleware.py", line 107, in auth_middleware
+    return await handler(request)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ghu/aiworker/polyclaw/app/runtime/server/setup/_routes.py", line 189, in start_tunnel
+    body = await req.json()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/ghu/aiworker/polyclaw/.venv/lib/python3.14/site-packages/aiohttp/web_request.py", line 695, in json
+    return loads(body)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2026-03-01 18:52:56,148  aiohttp.access  INFO  127.0.0.1 POST /api/setup/tunnel/start 500 0.011s
