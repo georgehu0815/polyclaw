@@ -65,6 +65,25 @@ async def on_startup_runtime(
         _foundry_iq_index_loop(foundry_iq_store),
     )
 
+    # Native Telegram polling — no Azure Bot Service required.
+    # Activates when a Telegram token is saved but Azure Bot is not configured.
+    tg_cfg = getattr(getattr(infra_store, "channels", None), "telegram", None)
+    tg_token = getattr(tg_cfg, "token", "") if tg_cfg else ""
+    if tg_token and not cfg.bot_app_id and agent and session_store:
+        from ..messaging.telegram_native import TelegramPollingChannel
+
+        hitl = getattr(agent, "hitl_interceptor", None)
+        tg_channel = TelegramPollingChannel(
+            token=tg_token,
+            agent=agent,
+            hitl=hitl,
+            session_store=session_store,
+        )
+        tg_task = await tg_channel.start()
+        app["telegram_channel"] = tg_channel
+        app["telegram_task"] = tg_task
+        logger.info("[startup.runtime] Native Telegram polling started (no Azure)")
+
     logger.info(
         "[startup.runtime] mode=%s lockdown=%s bot_configured=%s "
         "telegram_configured=%s tunnel=%s provisioner=%s az=%s",
@@ -183,10 +202,15 @@ async def on_cleanup(
     agent: object | None,
 ) -> None:
     """Cancel background tasks and decommission infrastructure on shutdown."""
-    for key in ("scheduler_task", "proactive_task", "foundry_iq_task", "reconcile_task"):
+    for key in ("scheduler_task", "proactive_task", "foundry_iq_task",
+                "reconcile_task", "telegram_task"):
         task = app.get(key)
         if task and not task.done():
             task.cancel()
+
+    tg_channel = app.get("telegram_channel")
+    if tg_channel:
+        await tg_channel.stop()
 
     if mode == ServerMode.combined:
         if cfg.lockdown_mode:

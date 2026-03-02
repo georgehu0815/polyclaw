@@ -1,4 +1,6 @@
 # Python
+.*
+.polyclaw.pid
 .polyclaw.log
 .polyclaw-data/
 __pycache__/
