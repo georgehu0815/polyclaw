@@ -1,4 +1,5 @@
 # Python
+.polyclaw-data/
 __pycache__/
 *.pyc
 *.pyo

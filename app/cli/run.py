@@ -133,7 +133,7 @@ def _wire_subsystems(agent: Agent, *, auto_approve: bool) -> None:
                 label = "[green]approved[/green]" if payload.get("approved") else "[red]denied[/red]"
                 console.print(f"Tool {payload.get('tool', '?')} {label}")
 
-        agent.hitl_interceptor.set_emit(_cli_emit)
+        agent.hitl_interceptor.bind_turn(emit=_cli_emit)
 
     # Sandbox
     try:

@@ -747,3 +747,26 @@ Traceback (most recent call last):
     raise JSONDecodeError("Expecting value", s, err.value) from None
 json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 2026-03-01 18:52:56,148  aiohttp.access  INFO  127.0.0.1 POST /api/setup/tunnel/start 500 0.011s
+2026-03-01 18:56:44,538  app.runtime.state.memory  INFO  Memory formation: sending 5 turns to claude-sonnet-4.6
+2026-03-01 18:57:04,660  app.runtime.state.memory  INFO  Memory formation complete (15 chars returned).
+2026-03-01 19:06:40,119  aiohttp.access  INFO  127.0.0.1 GET /api/foundry-iq/config 200 0.000s
+2026-03-01 19:06:40,898  aiohttp.access  INFO  127.0.0.1 GET /api/environments 200 0.000s
+2026-03-01 19:06:41,417  aiohttp.access  INFO  127.0.0.1 GET /api/workspace/list 200 0.001s
+2026-03-01 19:06:42,340  aiohttp.access  INFO  127.0.0.1 GET /api/setup/voice/config 200 0.000s
+2026-03-01 19:06:42,683  aiohttp.access  INFO  127.0.0.1 GET /api/workspace/list 200 0.001s
+2026-03-01 19:06:47,624  aiohttp.access  INFO  127.0.0.1 GET /api/workspace/read 200 0.001s
+2026-03-01 19:06:53,558  aiohttp.access  INFO  127.0.0.1 GET /api/monitoring/config 200 0.000s
+2026-03-01 19:07:12,013  aiohttp.access  INFO  127.0.0.1 GET /assets/MessagingSettings-Dbg5gX_5.js 200 0.003s
+2026-03-01 19:07:12,015  aiohttp.access  INFO  127.0.0.1 GET /assets/Proactive-8Bq04jTh.js 200 0.001s
+2026-03-01 19:07:12,473  aiohttp.access  INFO  127.0.0.1 GET /api/setup/config 200 0.001s
+2026-03-01 19:07:12,474  aiohttp.access  INFO  127.0.0.1 GET /api/models 200 0.000s
+2026-03-01 19:07:16,793  aiohttp.access  INFO  127.0.0.1 GET /api/proactive 200 0.000s
+2026-03-01 19:07:24,380  aiohttp.access  INFO  127.0.0.1 GET /assets/Customization-BfMxiNp2.js 200 0.002s
+2026-03-01 19:07:26,271  aiohttp.access  INFO  127.0.0.1 GET /assets/Breadcrumb-MZ5WD929.js 200 0.046s
+2026-03-01 19:07:26,271  aiohttp.access  INFO  127.0.0.1 GET /assets/Skills-41V_Uinb.js 200 0.046s
+2026-03-01 19:07:26,276  aiohttp.access  INFO  127.0.0.1 GET /api/skills 200 0.003s
+2026-03-01 19:07:29,517  aiohttp.access  INFO  127.0.0.1 GET /api/skills/marketplace 200 3.240s
+2026-03-01 19:08:10,273  app.runtime.registries.skills  INFO  Installed skill: azure-resource-visualizer -> /Users/ghu/.polyclaw/skills/azure-resource-visualizer
+2026-03-01 19:08:10,273  aiohttp.access  INFO  127.0.0.1 POST /api/skills/install 200 0.732s
+2026-03-01 19:08:10,281  aiohttp.access  INFO  127.0.0.1 GET /api/skills 200 0.003s
+2026-03-01 19:08:12,632  aiohttp.access  INFO  127.0.0.1 GET /api/skills/marketplace 200 2.351s
