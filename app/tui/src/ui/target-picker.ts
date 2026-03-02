@@ -2,7 +2,8 @@
  * Deployment target picker -- interactive selector shown before the TUI
  * launches. Runs in a lightweight OpenTUI renderer.
  *
- * Supports two targets:
+ * Supports three targets:
+ *   - Local Process (default -- no Docker required)
  *   - Local Docker (always available)
  *   - Azure Container Apps (requires `az` CLI + login)
  *
@@ -20,6 +21,7 @@ import { resetTerminal } from "../utils/terminal.js";
 import { LOGO_TEXT } from "../config/constants.js";
 import { createMascotLogoLines } from "./mascot.js";
 import type { DeployTarget, TargetType } from "../deploy/target.js";
+import { LocalDeployTarget, isLocalRunning } from "../deploy/local.js";
 import { DockerDeployTarget } from "../deploy/docker.js";
 import {
   AcaDeployTarget,
@@ -55,6 +57,7 @@ export async function pickDeployTarget(
   botPort: number,
 ): Promise<DeployTarget> {
   const envTarget = process.env.POLYCLAW_TARGET?.toLowerCase();
+  if (envTarget === "local") return new LocalDeployTarget();
   if (envTarget === "docker") return new DockerDeployTarget();
   if (envTarget === "aca") {
     const existing = await getExistingDeployment();
@@ -79,7 +82,8 @@ async function showPicker(
     const acaSubLabels = ["Reconnect", "Deploy fresh", "Remove"];
 
     const options: TargetOption[] = [
-      { id: "docker", label: "Local Docker", description: "Build and run locally (default)", available: true },
+      { id: "local", label: "Local Process", description: "Run directly without Docker (default)", available: true, detail: "Checking..." },
+      { id: "docker", label: "Local Docker", description: "Build and run via docker compose", available: true },
       { id: "aca", label: "Azure Container Apps \x1b[32m(experimental)\x1b[0m", description: "Deploy to Azure (persistent, cloud-hosted)", available: false, detail: "Checking..." },
     ];
 
@@ -113,7 +117,9 @@ async function showPicker(
             resetTerminal();
             process.stdout.write("\x1b[2J\x1b[H");
 
-            if (selected.id === "docker") {
+            if (selected.id === "local") {
+              resolve(new LocalDeployTarget());
+            } else if (selected.id === "docker") {
               resolve(new DockerDeployTarget());
             } else if (acaExisting && acaSubIndex === 2) {
               process.stdout.write("\n");
@@ -201,6 +207,17 @@ async function showPicker(
 
       renderer.requestRender();
     }
+
+    // Background local server status check
+    (async () => {
+      const running = await isLocalRunning();
+      options[0].detail = undefined;
+      options[0].description = running
+        ? "Run directly without Docker (server already running)"
+        : "Run directly without Docker (default)";
+      refreshItems();
+      renderer.requestRender();
+    })();
 
     // Background ACA availability check
     (async () => {

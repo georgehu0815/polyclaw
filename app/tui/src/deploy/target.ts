@@ -8,7 +8,7 @@
 
 import type { DeployResult, LogStream } from "../config/types.js";
 
-export type TargetType = "docker" | "aca";
+export type TargetType = "local" | "docker" | "aca";
 
 export interface DeployTarget {
   /** Human-readable label shown in the TUI. */
