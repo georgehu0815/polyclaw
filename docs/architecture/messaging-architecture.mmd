@@ -1,0 +1,149 @@
+flowchart TB
+    %% ══════════════════════════════════════════════════════
+    %% POLYCLAW — MESSAGING & CHANNEL ARCHITECTURE
+    %% ══════════════════════════════════════════════════════
+
+    %% ── CHANNEL SWIMLANES (top row) ────────────────────
+    subgraph bflane["🔗 Bot Framework Channel  (Azure Bot Service · REST)"]
+        direction LR
+        UBF(["👤 Teams · Slack · Telegram via Azure"])
+        BF["Bot(ActivityHandler)\non_message_activity()"]
+        ABF{"Azure Auth\n+ Whitelist"}
+        HPBF{{"🔄 Pending\nHITL?"}}
+        CMD_BF["⌨️ CommandDispatcher\n/new /status /model /skills …"]
+        MP["⚙️ MessageProcessor\nprocess(ref, prompt, ch)\nBackground task — avoids 15s timeout\nTyping indicator loop 3s"]
+        UBF -->|"REST POST /api/messages"| BF --> ABF --> HPBF
+        HPBF -->|"no — cmd?"| CMD_BF
+        HPBF -->|"yes → resolve"| MP
+        CMD_BF -->|"not handled"| MP
+    end
+
+    subgraph tglane["📨 Telegram Native Channel  (HTTP Long-Poll · no public URL needed)"]
+        direction LR
+        UTG(["👤 Telegram Direct"])
+        TG["TelegramPollingChannel\n_poll_loop() → _handle_update()\ngetUpdates timeout=30s"]
+        ATG{"Telegram\nWhitelist"}
+        HPTG{{"🔄 Pending\nHITL?"}}
+        CMD_TG["⌨️ CommandDispatcher\n/new /status /model /skills …"]
+        TGR["⚙️ _run_turn(chat_id, text)\nInline async · sendChatAction typing"]
+        UTG -->|"getUpdates long-poll"| TG --> ATG --> HPTG
+        HPTG -->|"no — cmd?"| CMD_TG
+        HPTG -->|"yes → resolve"| TGR
+        CMD_TG -->|"not handled"| TGR
+    end
+
+    subgraph wslane["🌐 WebSocket Chat Channel  (/api/chat/ws · Real-time)"]
+        direction LR
+        UWS(["👤 Web / Admin UI"])
+        WS["ChatHandler\nhandle() WebSocket"]
+        CMD_WS["⌨️ CommandDispatcher\n/new /status /model /skills …"]
+        WSP["⚙️ _send_prompt(ws, data)\nStreams on_delta · on_event (tools)"]
+        UWS -->|"WS upgrade"| WS --> CMD_WS -->|"not handled"| WSP
+    end
+
+    %% ── SHARED AGENT CORE ──────────────────────────────
+    subgraph agentcore["④ Agent Core"]
+        direction LR
+        AGT["🤖 Agent\nagent.send(prompt)\n• on_delta — text chunks\n• on_event — tool events\n• pre-tool → HitlInterceptor"]
+
+        subgraph hitlblock["🛡️ HitlInterceptor  —  on_pre_tool_use()  →  allow · deny"]
+            direction LR
+            HITL["Prompt Shield\nfilter\nPer-turn\nbind/unbind"]
+            HC1["💬 Chat WS\nemit(approval_request)\nwait Future 300s"]
+            HC2["🤖 Bot Reply\nsend confirm\nwait 'y'"]
+            HC3["📞 Phone\nPhoneVerifier\n.request_verification()"]
+            HC4["🧠 AITL\nAitlReviewer\n.review()"]
+            HITL --> HC1 & HC2 & HC3 & HC4 -->|"allow/deny"| HITL
+        end
+
+        AGT <-->|"pre-tool · decision"| HITL
+    end
+
+    %% ── STATE & PERSISTENCE ────────────────────────────
+    subgraph statelayer["⑤ State & Persistence"]
+        direction LR
+        SS["📁 SessionStore\n~/.polyclaw/sessions/*.json\nrole · content · timestamp · channel · tool_calls"]
+        CRS["📋 ConversationReferenceStore\nconv_refs.json  Key: channel_id:user_id\nStores refs for proactive messaging"]
+        MEM["🧠 MemoryFormation\nDaily logs · topic notes\nLong-term context"]
+    end
+
+    %% ── BACKGROUND SERVICES ────────────────────────────
+    subgraph bgsvc["⑥ Background Services"]
+        direction LR
+        PDL["⏰ ProactiveDeliveryLoop  60s\n• Deliver scheduled messages\n• Auto-generate via LLM when user idle > 1h\n• Daily limit · preferred time window"]
+        CQ["🃏 CardQueue  thread-safe\nAdaptive Cards · Hero Cards\ndrain() on each response send"]
+    end
+
+    %% ── OUTPUT / DELIVERY ──────────────────────────────
+    subgraph outlayer["⑦ Output & Delivery"]
+        direction LR
+        FMT["🎨 Formatting\nmarkdown_to_telegram()\nstrip_markdown()\nChannel-aware text"]
+        CHUNK["✂️ Chunking\nMAX 4000 chars\nsplit newlines/spaces"]
+        PM["📤 send_proactive_message\nAdapter.continue_conversation()\nfor each ConversationReference"]
+    end
+
+    %% ── RESPONSE DELIVERY ──────────────────────────────
+    RBFOUT(["✅ Teams · Slack · Telegram via Azure"])
+    RTGOUT(["✅ Telegram Direct"])
+    RWSOUT(["✅ Web / Admin UI"])
+
+    %% ══════════════════════════════════════════════════════
+    %% INTER-LAYER CONNECTIONS
+    %% ══════════════════════════════════════════════════════
+
+    %% Processors → Agent
+    MP -->|"agent.send()"| AGT
+    TGR -->|"agent.send()"| AGT
+    WSP -->|"agent.send()"| AGT
+
+    %% HITL bind (dashed)
+    MP -.->|"bind bot_reply_fn"| HITL
+    TGR -.->|"bind bot_reply_fn"| HITL
+    WSP -.->|"bind emit(ws)"| HITL
+
+    %% State writes
+    MP & TGR & WSP -->|"record msg"| SS
+    BF -->|"store ConvRef"| CRS
+    AGT -->|"record response"| MEM
+
+    %% Proactive loop
+    PDL -->|"get_all() refs"| CRS
+    PDL -->|"notify(msg)"| PM
+
+    %% Agent → Output
+    AGT -->|"response text"| FMT
+    FMT --> CHUNK --> PM
+    CQ -->|"drain() cards"| PM
+
+    %% Output → users
+    PM -->|"continue_conversation()"| RBFOUT
+    TGR -->|"POST sendMessage"| RTGOUT
+    WSP -->|"on_delta / done events"| RWSOUT
+
+    %% ══════════════════════════════════════════════════════
+    %% STYLING
+    %% ══════════════════════════════════════════════════════
+    classDef userCls fill:#f8f9fa,stroke:#868e96,color:#212529,font-weight:bold
+    classDef channelCls fill:#d3f9d8,stroke:#2f9e44,color:#1a3d1f,font-weight:bold
+    classDef authCls fill:#ffe8cc,stroke:#d9480f,color:#5c1d00,font-weight:bold
+    classDef processCls fill:#e5dbff,stroke:#5f3dc4,color:#2a1157,font-weight:bold
+    classDef agentCls fill:#c5f6fa,stroke:#0c8599,color:#053240,font-weight:bold
+    classDef hitlCls fill:#ffe3e3,stroke:#c92a2a,color:#5c0000,font-weight:bold
+    classDef stateCls fill:#fff4e6,stroke:#e67700,color:#5c3300,font-weight:bold
+    classDef bgCls fill:#f3d9fa,stroke:#862e9c,color:#3d0054,font-weight:bold
+    classDef outputCls fill:#e7f5ff,stroke:#1971c2,color:#0a2d5c,font-weight:bold
+    classDef decisionCls fill:#fff9db,stroke:#f59f00,color:#5c4000,font-weight:bold
+    classDef successCls fill:#d3f9d8,stroke:#2f9e44,color:#1a3d1f,font-weight:bold
+
+    class UBF,UTG,UWS userCls
+    class BF,TG,WS channelCls
+    class ABF,ATG authCls
+    class CMD_BF,CMD_TG,CMD_WS authCls
+    class HPBF,HPTG decisionCls
+    class MP,TGR,WSP processCls
+    class AGT agentCls
+    class HITL,HC1,HC2,HC3,HC4 hitlCls
+    class SS,CRS,MEM stateCls
+    class PDL,CQ bgCls
+    class FMT,CHUNK,PM outputCls
+    class RBFOUT,RTGOUT,RWSOUT successCls
