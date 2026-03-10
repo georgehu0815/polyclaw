@@ -2,7 +2,7 @@
   <img src="assets/logo.png" alt="Polyclaw" width="120" />
 </p>
 
-<h1 align="center">Polyclaw</h1>
+<h1 align="center">Polyclaw (Experimental)</h1>
 
 <p align="center">
   <strong>Your personal AI copilot that lives where you do -- browser, terminal, messaging apps, or a phone call.</strong>
