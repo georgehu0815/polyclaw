@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/* \
-    && npm install -g @github/copilot@0.0.405
+    && npm install -g @github/copilot@0.0.403
 
 # GitHub CLI (for authentication -- copilot CLI uses gh auth)
 RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
